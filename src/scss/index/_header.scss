@@ -1,0 +1,18 @@
+@use "../base/variables" as v;
+@use "base/mixins" as m;
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: v.$rosa;
+  color: v.$blanco;
+  align-items: center;
+  padding: 1.5% 10%;
+  a {
+    text-decoration: none;
+    color: v.$blanco;
+  }
+  a:hover {
+    color: v.$grisO;
+  }
+}

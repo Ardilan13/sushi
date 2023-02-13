@@ -1,0 +1,29 @@
+@use "../base/variables" as v;
+@use "base/mixins" as m;
+
+.info {
+  .input {
+    margin-right: 25%;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+    input {
+      width: 50%;
+      margin-left: 3rem;
+    }
+  }
+
+  button {
+    background-color: v.$rosa;
+    padding: 1.2rem 2rem;
+    border: none;
+    border-radius: 5px;
+    color: v.$blanco;
+  }
+
+  button:hover {
+    background-color: darken(v.$rosa, 10);
+  }
+}

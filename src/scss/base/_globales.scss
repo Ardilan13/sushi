@@ -1,0 +1,91 @@
+@use "variables" as v; //trae el archivo _variables como v
+@use "base/mixins" as m;
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  font-family: v.$fuentePrincipal;
+  font-size: 1.6rem;
+  background-color: v.$gris;
+}
+p {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: justify;
+  font-family: v.$fuentePrincipal;
+}
+button {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 5rem 0;
+  cursor: default;
+  font-weight: 700;
+}
+h1 {
+  font-size: 5rem;
+}
+h2 {
+  font-size: 4.5rem;
+  @include m.telefono {
+    font-size: 4rem !important;
+  }
+}
+h3 {
+  font-size: 4rem;
+}
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+h2 {
+  font-size: 5.5rem;
+  font-weight: 800;
+}
+main {
+  .container {
+    margin: 4% 10%;
+    background-color: v.$blanco;
+    border: 1.5px solid v.$grisO;
+    width: auto;
+    height: 100%;
+
+    .header {
+      background-color: v.$rosa;
+      color: v.$blanco;
+      border-bottom: 1.5px solid v.$grisO;
+      padding: 1.5rem;
+      p {
+        text-align: center;
+      }
+    }
+
+    .info {
+      text-align: center;
+      padding: 2rem;
+    }
+  }
+}
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1.5px solid v.$grisO;
+  border-style: solid;
+}
