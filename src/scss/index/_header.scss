@@ -7,12 +7,21 @@ header {
   background-color: v.$rosa;
   color: v.$blanco;
   align-items: center;
-  padding: 1.5% 10%;
+  padding: 1.5% 5%;
   a {
     text-decoration: none;
     color: v.$blanco;
   }
   a:hover {
     color: v.$grisO;
+  }
+  #cerrar_sesion {
+    color: v.$grisO;
+  }
+  .pages {
+    width: 100%;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
   }
 }

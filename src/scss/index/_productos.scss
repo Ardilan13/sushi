@@ -15,6 +15,24 @@
     width: 9% !important;
   }
   .min {
-    width: 5% !important;
+    width: 4% !important;
+  }
+  .edit {
+    cursor: pointer;
+  }
+}
+
+.botones {
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  #new_com {
+    background-color: v.$verde;
+  }
+
+  #new_com:hover {
+    background-color: darken(v.$verde, 10);
   }
 }

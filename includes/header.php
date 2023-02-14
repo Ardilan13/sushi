@@ -17,6 +17,15 @@
 
 <body>
     <header>
-        <p>HaikoSushi</p>
-        <a href="ajax/logout.php">Cerrar Sesion</a>
+        <h3>HaikoSushi</h3>
+        <?php
+        session_start();
+        if (isset($_SESSION["id"])) { ?>
+            <div class="pages">
+                <a href="productos.php">Productos</a>
+                <a href="">Preparaciones</a>
+                <a href="">Diario</a>
+            </div>
+            <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>
+        <?php } ?>
     </header>
