@@ -1,0 +1,20 @@
+@use "../base/variables" as v;
+@use "base/mixins" as m;
+
+#productos {
+  padding-top: 1rem;
+
+  th,
+  td {
+    border: 0.8px solid v.$grisO !important;
+  }
+  .precio {
+    width: 11% !important;
+  }
+  .mid {
+    width: 9% !important;
+  }
+  .min {
+    width: 5% !important;
+  }
+}

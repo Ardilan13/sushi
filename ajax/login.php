@@ -1,7 +1,4 @@
 <?php
-/* require_once '../conexion.php';
-$con = conectar(); */
-
 $clave = $_POST["clave"];
 
 if ($clave == 'prueba') {
