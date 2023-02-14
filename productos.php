@@ -2,7 +2,6 @@
 require_once 'includes/auth.php';
 require_once 'conexion.php';
 $con = conectar(); ?>
-
 <main>
     <div class="container">
         <div class="header">
