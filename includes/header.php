@@ -23,6 +23,7 @@
         if (isset($_SESSION["id"])) { ?>
             <div class="pages">
                 <a href="productos.php">Productos</a>
+                <a href="compras.php">Compras</a>
                 <a href="">Preparaciones</a>
                 <a href="">Diario</a>
             </div>

@@ -29,7 +29,7 @@ $("#new_pro").on("click", function (e) {
 });
 
 //Ajax crea un nuevo producto
-$("#btn_agregar").on("click", function (e) {
+$("#add_producto").on("click", function (e) {
   e.preventDefault();
 
   $.ajax({
@@ -53,13 +53,13 @@ $("#btn_agregar").on("click", function (e) {
 });
 
 //accede al menu actualizar producto y le pasa el id por metodo GET
-$(".edit").on("click", function (e) {
+$(".edit_pro").on("click", function (e) {
   e.preventDefault();
   $(location).prop("href", "new_producto.php?id=" + $(this).attr("id"));
 });
 
 //Ajax actualiza el producto seleccionado
-$("#btn_update").on("click", function (e) {
+$("#btn_update_pro").on("click", function (e) {
   e.preventDefault();
 
   $.ajax({
@@ -82,30 +82,90 @@ $("#btn_update").on("click", function (e) {
   });
 });
 
-// Filtro y busqueda tablas
+//boton acceder al modulo de generar una compra
+$("#new_com").on("click", function (e) {
+  e.preventDefault();
 
-let temp = $("#clonar").clone();
-$("#clonar").click(function () {
-  $("#clonar").after(temp);
+  $(location).prop("href", "new_compra.php?");
 });
 
+//Ajax que genera una nueva compra
+$("#add_compra").on("click", function (e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/add_compra.php",
+    data: $("#new_compra").serialize(),
+    type: "POST",
+    dataType: "text",
+    success: function (text) {
+      if (text == 1) {
+        alert("Compra generada y producto actualizado!");
+        $(location).prop("href", "compras.php");
+      } else {
+        alert("Error, intente nuevamente.");
+        terminal(text);
+      }
+    },
+    error: function (xhr, status, errorThrown) {
+      alert("Error");
+    },
+  });
+});
+
+//Actualizar la cantidad para tener en cuenta las unidades, modulo agreagr compras
+$("#producto").change(function () {
+  var unidad = $("#producto option:selected").attr("unidad");
+  switch (unidad) {
+    case "1":
+      resultado = " en Kgs:";
+      break;
+    case "2":
+      resultado = " en Lts:";
+      break;
+    case "3":
+      resultado = " en Und:";
+      break;
+    default:
+      resultado = ":";
+  }
+  $("#unidad_producto").html("Cantidad" + resultado);
+});
+
+// Filtro y busqueda tablas
 $(document).ready(function () {
-  var table = $("#productos").DataTable({
+  let temp = $("#clonar").clone();
+  $("#clonar").click(function () {
+    $("#clonar").after(temp);
+  });
+
+  var table = $("#tabla").DataTable({
     orderCellsTop: true,
     fixedHeader: true,
   });
 
   //Crea el buscador de cada atributo
-  /*   $("#productos thead tr").clone(true).appendTo("#productos thead");
-   */
-  $("#productos thead tr:eq(1) th").each(function (i) {
-    var title = $(this).text(); //es el nombre de la columna
-    $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
+  $("#tabla thead tr").clone(true).appendTo("#tabla thead");
+
+  $("#tabla thead tr:eq(1) th").each(function (i) {
+    $(this).html(
+      '<input type="text" style="width:80%; padding: 5px;border-radius: 5px;border:.5px solid grey;"/>'
+    );
 
     $("input", this).on("keyup change", function () {
       if (table.column(i).search() !== this.value) {
         table.column(i).search(this.value).draw();
       }
     });
+  });
+
+  $.ajax({
+    url: "ajax/list_productos.php",
+    data: null,
+    type: "POST",
+    dataType: "text",
+    success: function (text) {
+      $("#producto").html(text);
+    },
   });
 });

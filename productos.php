@@ -8,7 +8,7 @@ $con = conectar(); ?>
             <p>Productos</p>
         </div>
         <div class="info">
-            <table id="productos" class="display" style="width:100%">
+            <table id="tabla" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -61,12 +61,14 @@ $con = conectar(); ?>
                                 <td class="precio"><?php echo number_format($row["precio"]); ?></td>
                                 <td class="mid"><?php echo $row["cantidad"]; ?></td>
                                 <td class="precio"><?php echo number_format($total); ?></td>
-                                <td class="min edit" id="<?php echo $row["id"]; ?>">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="30" height="30" viewBox="0 0 24 24" stroke-width="1" stroke="#ed3456" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                                    </svg>
+                                <td class="min">
+                                    <button class="edit edit_pro" id="<?php echo $row["id"]; ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                                        </svg>
+                                    </button>
                                 </td>
                             </tr>
                     <?php }
@@ -79,7 +81,6 @@ $con = conectar(); ?>
 
             <div class="botones">
                 <button id="new_pro">Nuevo Producto</button>
-                <button id="new_com">Nueva Compra</button>
             </div>
         </div>
     </div>

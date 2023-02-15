@@ -61,7 +61,7 @@ h2 {
 }
 main {
   .container {
-    margin: 4% 5%;
+    margin: 3% 5%;
     background-color: v.$blanco;
     border: 1.5px solid v.$grisO;
     width: auto;
@@ -83,12 +83,26 @@ main {
     }
   }
 }
+
+table button {
+  background-color: v.$verde !important;
+}
+
+table button:hover {
+  background-color: darken(v.$verde, 10) !important;
+}
+
 form input,
-form select {
+form select,
+input[type="search"] {
   padding: 8px;
   border-radius: 5px;
   border: 1.5px solid v.$grisO;
   border-style: solid;
   width: 50%;
   margin-left: 3rem;
+}
+
+input[type="search"] {
+  width: auto;
 }
