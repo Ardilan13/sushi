@@ -14,7 +14,6 @@ $con = conectar(); ?>
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Proveedor</th>
-                        <th>Unidad</th>
                         <th>%</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
@@ -30,8 +29,17 @@ $con = conectar(); ?>
                         while ($row = mysqli_fetch_assoc($resultado)) {
                             (float)$merma = $row["merma"] / 100;
                             (float)$total = ($row["cantidad"] * $row["precio"]) + ($row["cantidad"] * $row["precio"]) * $merma; ?>
+                            <!-- <td class="mid"> -->
+                            <?php if ($row["unidad"] == 1) {
+                                $und = 'Kgs';
+                            } else if ($row["unidad"] == 2) {
+                                $und = 'Lts';
+                            } else {
+                                $und = 'Und';
+                            } ?>
+                            <!-- </td> -->
                             <tr>
-                                <td id="<?php echo $row['id']; ?>"><?php echo $row["nombre"]; ?></td>
+                                <td><?php echo $row["nombre"]; ?></td>
                                 <td class="mid">
                                     <?php if ($row["tipo"] == 1) {
                                         echo 'Abarrotes';
@@ -48,19 +56,10 @@ $con = conectar(); ?>
                                     } ?>
                                 </td>
                                 <td><?php echo $row["proveedor"]; ?></td>
-                                <td class="mid">
-                                    <?php if ($row["unidad"] == 1) {
-                                        echo 'Kgs';
-                                    } else if ($row["unidad"] == 2) {
-                                        echo 'Lts';
-                                    } else {
-                                        echo 'Und';
-                                    } ?>
-                                </td>
                                 <td class="min"><?php echo $row["merma"]; ?></td>
-                                <td class="precio"><?php echo number_format($row["precio"]); ?></td>
-                                <td class="mid"><?php echo $row["cantidad"]; ?></td>
-                                <td class="precio"><?php echo number_format($total); ?></td>
+                                <td class="precio"><?php echo number_format($row["precio"], 2); ?></td>
+                                <td class="mid"><?php echo number_format($row["cantidad"], 1) . ' ' . $und; ?></td>
+                                <td class="precio"><?php echo number_format($total, 2); ?></td>
                                 <td class="min">
                                     <button class="edit edit_pro" id="<?php echo $row["id"]; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">

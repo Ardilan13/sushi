@@ -149,7 +149,7 @@ $(document).ready(function () {
 
   $("#tabla thead tr:eq(1) th").each(function (i) {
     $(this).html(
-      '<input type="text" style="width:80%; padding: 5px;border-radius: 5px;border:.5px solid grey;"/>'
+      '<input type="text" style="width:80%; padding: 5px;border-radius: 5px;border:.5px solid grey;" placeholder="Buscar..."/>'
     );
 
     $("input", this).on("keyup change", function () {

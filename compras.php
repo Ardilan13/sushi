@@ -21,15 +21,22 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
-                    $get_compras = "SELECT c.id,p.nombre as producto, c.fecha, c.cantidad, c.precio FROM compra c join productos p on c.id_producto = p.id;";
+                    $get_compras = "SELECT c.id,p.nombre as producto,p.unidad, c.fecha, c.cantidad, c.precio FROM compra c join productos p on c.id_producto = p.id;";
                     $resultado = mysqli_query($con, $get_compras);
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) { ?>
+                            <?php if ($row["unidad"] == 1) {
+                                $und = 'Kgs';
+                            } else if ($row["unidad"] == 2) {
+                                $und = 'Lts';
+                            } else {
+                                $und = 'Und';
+                            } ?>
                             <tr>
                                 <td><?php echo $row["producto"]; ?></td>
                                 <td class="precio"><?php echo $row["fecha"]; ?></td>
                                 <td><?php echo number_format($row["precio"], 2); ?></td>
-                                <td class="mid"><?php echo number_format($row["cantidad"], 1); ?></td>
+                                <td class="mid"><?php echo number_format($row["cantidad"], 1) . ' ' . $und; ?></td>
                                 <td><?php echo number_format(($row["precio"] * $row["cantidad"]), 2) ?></td>
                                 <!-- <td class="min">
                                     <button class="edit edit_com" id="<?php echo $row["id"]; ?>">
