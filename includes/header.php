@@ -24,8 +24,9 @@
             <div class="pages">
                 <a href="productos.php">Productos</a>
                 <a href="compras.php">Compras</a>
-                <a href="">Preparaciones</a>
-                <a href="">Diario</a>
+                <a href="movimientos.php">Movimientos</a>
+                <a href="preparaciones.php">Preparaciones</a>
+                <a href="ventas.php">Ventas</a>
             </div>
             <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>
         <?php } ?>

@@ -5,24 +5,22 @@ $con = conectar(); ?>
 <main>
     <div class="container">
         <div class="header">
-            <p>Productos</p>
+            <p>Preparaciones y Recetas</p>
         </div>
         <div class="info">
             <table id="tabla" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Proveedor</th>
-                        <th>%</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                        <th>Edit</th>
+                        <th class="mid">Tipo</th>
+                        <th class="mid">Fecha</th>
+                        <th class="mid">Cantidad</th>
+                        <th>Motivo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                    /*                     $login = "SELECT p.nombre as producto,p.unidad,m.tipo,m.fecha, m.cantidad, m.motivo FROM movimientos m join productos p on m.id_producto = p.id;";*/
                     $login = "SELECT * from productos;";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
@@ -79,7 +77,7 @@ $con = conectar(); ?>
             <button hidden id="clonar">clon</button>
 
             <div class="botones">
-                <button id="new_pro">Nuevo Producto</button>
+                <button class="new_pyr">Generar Nueva</button>
             </div>
         </div>
     </div>

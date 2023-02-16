@@ -55,11 +55,11 @@ require_once 'includes/auth.php'; ?>
                             </div>
                             <div class="input">
                                 <label for="cantidad">Cantidad:</label>
-                                <input type="number" id="cantidad" name="cantidad" value="<?php echo $row["cantidad"]; ?>" min="0" required>
+                                <input type="number" id="cantidad" disabled name="cantidad" value="<?php echo $row["cantidad"]; ?>" min="0" required>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" id="precio" name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
+                                <input type="number" id="precio" disabled name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
                             </div>
                             <button type="submit" id="btn_update_pro">Actualizar</button>
                     <?php }

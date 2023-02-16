@@ -92,6 +92,15 @@ table button:hover {
   background-color: darken(v.$verde, 10) !important;
 }
 
+.status_0 {
+  color: v.$verde !important;
+  font-weight: 700;
+}
+.status_1 {
+  color: v.$rosa !important;
+  font-weight: 700;
+}
+
 form input,
 form select,
 input[type="search"] {

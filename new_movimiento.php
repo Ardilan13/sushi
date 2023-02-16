@@ -3,14 +3,22 @@ require_once 'includes/auth.php'; ?>
 <main>
     <div class="container">
         <div class="header">
-            <p>Nueva Compra</p>
+            <p>Generar Movimiento</p>
         </div>
         <div class="info">
-            <form id="new_compra">
+            <form id="new_movimiento">
                 <div class="input">
                     <label for="producto">Producto:</label>
                     <select name="producto" id="producto" required>
                         <!-- Generado por ajax list_product -->
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="tipo">Tipo:</label>
+                    <select name="tipo" id="tipo" required>
+                        <option></option>
+                        <option value="0">Entrada</option>
+                        <option value="1">Salida</option>
                     </select>
                 </div>
                 <div class="input">
@@ -22,10 +30,10 @@ require_once 'includes/auth.php'; ?>
                     <input type="number" id="cantidad" name="cantidad" min="0" required>
                 </div>
                 <div class="input">
-                    <label for="precio">Precio:</label>
-                    <input type="number" id="precio" name="precio" min="0" required>
+                    <label for="motivo">Motivo:</label>
+                    <input type="text" id="motivo" name="motivo" required>
                 </div>
-                <button type="submit" id="add_compra">Crear</button>
+                <button type="submit" id="add_movimiento">Crear</button>
             </form>
         </div>
     </div>
