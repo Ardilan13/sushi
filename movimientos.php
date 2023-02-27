@@ -20,7 +20,7 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
-                    $login = "SELECT p.nombre as producto,p.unidad,m.tipo,m.fecha, m.cantidad, m.motivo FROM movimientos m join productos p on m.id_producto = p.id;";
+                    $login = "SELECT p.nombre as producto,p.unidad,m.tipo,m.fecha, m.cantidad, m.motivo FROM movimientos m join productos p on m.id_producto = p.id ORDER BY m.id DESC;";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {

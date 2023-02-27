@@ -104,6 +104,115 @@ $("#btn_update_pro").on("click", function (e) {
   }
 });
 
+$(".new_pre").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "new_preparacion.php");
+});
+
+$(".edit_pre").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "new_preparacion.php?id=" + $(this).attr("id"));
+});
+
+$("#add_preparacion").on("click", function (e) {
+  e.preventDefault();
+
+  if ($("#nombre").val().length > 0 && $("#tipo").val().length > 0) {
+    $.ajax({
+      url: "ajax/add_preparacion.php",
+      data: $("#new_preparacion").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Preparacion Creada!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+//Ajax actualiza la preparacion seleccionado
+$("#btn_update_pre").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#nombre").val().length > 0 &&
+    $("#proveedor").val().length > 0 &&
+    $("#tipo").val().length > 0 &&
+    $("#merma").val().length > 0 &&
+    $("#unidad").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/update_producto.php",
+      data: $("#new_producto").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Producto Actualizado!");
+          $(location).prop("href", "productos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$("#new_ing").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "new_ingrediente.php?id=" + $("#id").val());
+});
+
+$("#add_ing").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#producto").val().length > 0 &&
+    $("#cantidad").val().length > 0 &&
+    $("#valor").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/add_ingrediente.php",
+      data: $("#new_ingrediente").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Ingrediente agregado y valor actualizado!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          alert(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
 //boton acceder al modulo de generar una compra
 $("#new_com").on("click", function (e) {
   e.preventDefault();
@@ -174,10 +283,22 @@ $("#producto").change(function () {
         //traen los datos en un json y se muestran en los placeholder
         var data = $.parseJSON(text);
         $("#precio").attr("placeholder", data.precio);
+        $("#valor").attr("placeholder", data.precio);
         $("#cantidad").attr("placeholder", data.cantidad);
+        $("#cantidad").attr("precio", data.valor);
+        $("#cantidad").val("");
+        $("#valor").val("");
       }
     },
   });
+});
+
+//Actualizar el valor de manera automatica al cambiar la cantidad
+$("#cantidad").change(function () {
+  var cantidad = parseFloat($(this).val());
+  var precio = parseFloat($(this).attr("precio"));
+  var valor = cantidad * precio;
+  $("#valor").val(valor);
 });
 
 //acceder al menudo de generar movimientos, entradas o salidas

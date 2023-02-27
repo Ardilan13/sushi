@@ -21,7 +21,7 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
-                    $get_compras = "SELECT c.id,p.nombre as producto,p.unidad,p.status,c.fecha, c.cantidad, c.precio FROM compra c join productos p on c.id_producto = p.id;";
+                    $get_compras = "SELECT c.id,p.nombre as producto,p.unidad,p.status,c.fecha, c.cantidad, c.precio FROM compra c join productos p on c.id_producto = p.id ORDER BY id DESC;";
                     $resultado = mysqli_query($con, $get_compras);
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) { ?>

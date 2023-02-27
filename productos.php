@@ -14,7 +14,7 @@ $con = conectar(); ?>
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Proveedor</th>
-                        <th>%</th>
+                        <th>Merma</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
                         <th>Total</th>
@@ -23,7 +23,7 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
-                    $login = "SELECT * from productos;";
+                    $login = "SELECT * from productos ORDER BY id DESC;";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {

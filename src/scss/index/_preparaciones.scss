@@ -1,0 +1,21 @@
+@use "../base/variables" as v;
+@use "base/mixins" as m;
+
+#tabla {
+  input,
+  select {
+    margin-left: 0;
+    width: auto;
+  }
+  .delete {
+    background-color: v.$rosa !important;
+  }
+}
+
+#new_ing {
+  background-color: v.$verde;
+}
+
+#new_ing:hover {
+  background-color: darken(v.$verde, 10);
+}

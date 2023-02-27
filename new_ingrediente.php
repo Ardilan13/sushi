@@ -3,29 +3,26 @@ require_once 'includes/auth.php'; ?>
 <main>
     <div class="container">
         <div class="header">
-            <p>Nueva Compra</p>
+            <?php if (isset($_GET["id"])) { ?>
+                <p>Nuevo Ingrediente</p>
+            <?php } ?>
         </div>
         <div class="info">
-            <form id="new_compra">
+            <form id="new_ingrediente">
+                <input hidden type="text" value="<?php echo $_GET["id"]; ?>" name="id">
                 <div class="input">
                     <label for="producto">Producto:</label>
-                    <select name="producto" id="producto" required>
-                        <!-- Generado por ajax list_product -->
-                    </select>
-                </div>
-                <div class="input">
-                    <label for="fecha">Fecha:</label>
-                    <input type="text" disabled value="<?php echo date('d/m/Y'); ?>" id="fecha" name="fecha" required>
+                    <select name="producto" id="producto" required></select>
                 </div>
                 <div class="input">
                     <label for="cantidad" id="unidad_producto">Cantidad:</label>
                     <input type="number" id="cantidad" name="cantidad" min="0" required>
                 </div>
                 <div class="input">
-                    <label for="precio">Precio:</label>
-                    <input type="number" id="precio" name="precio" min="0" required>
+                    <label for="valor">Valor:</label>
+                    <input type="number" id="valor" name="valor" min="0" required>
                 </div>
-                <button type="submit" id="add_compra">Crear</button>
+                <button id="add_ing">Nuevo Ingrediente</button>
             </form>
         </div>
     </div>
