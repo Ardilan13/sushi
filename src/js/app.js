@@ -104,6 +104,92 @@ $("#btn_update_pro").on("click", function (e) {
   }
 });
 
+$("#btn_producir").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "produccion.php?id=" + $("#id").val());
+});
+
+$("input:radio[name=producido]").on("click", function (e) {
+  if ($("input:radio[name=producido]:checked").val() == "nuevo") {
+    $(".nuevo").show();
+    $(".existente").css("display", "none");
+  } else {
+    $(".existente").show();
+    $(".nuevo").css("display", "none");
+  }
+});
+
+$("#add_producto_pro").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#nombre").val().length > 0 &&
+    $("#tipo").val().length > 0 &&
+    $("#unidad").val().length > 0 &&
+    $("#cantidad").val().length > 0
+  ) {
+    if ($("#cantidad_pro_1").val() <= $("#test").val()) {
+      $.ajax({
+        url: "ajax/add_produccion.php",
+        data: $("#new_producto_pro").serialize(),
+        type: "POST",
+        dataType: "text",
+        success: function (text) {
+          if (text == 1) {
+            alert("Producto Creado y Cantidad Restada!");
+            $(location).prop("href", "productos.php");
+          } else {
+            alert("Error, intente nuevamente.");
+            alert(text);
+          }
+        },
+        error: function (xhr, status, errorThrown) {
+          alert("Error");
+        },
+      });
+    } else {
+      alert("La cantidad a usar no pued ser mayor a la cantidad existente.");
+    }
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$("#update_produccion").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#producto").val().length > 0 &&
+    $("#cantidad_pro_2").val().length > 0
+  ) {
+    if ($("#cantidad").val() <= $("#test1").val()) {
+      $.ajax({
+        url: "ajax/update_produccion.php",
+        data: $("#update_producto_pro").serialize(),
+        type: "POST",
+        dataType: "text",
+        success: function (text) {
+          if (text == 1) {
+            alert("Producto Actualizado y Cantidad Restada!");
+            $(location).prop("href", "productos.php");
+          } else {
+            alert("Error, intente nuevamente.");
+            alert(text);
+          }
+        },
+        error: function (xhr, status, errorThrown) {
+          alert("Error");
+        },
+      });
+    } else {
+      alert("La cantidad a usar no pued ser mayor a la cantidad existente.");
+    }
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
 $(".new_pre").on("click", function (e) {
   e.preventDefault();
 
@@ -198,6 +284,42 @@ $("#add_ing").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Ingrediente agregado y valor actualizado!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          alert(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$(".edit_pre_pro").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop(
+    "href",
+    "new_ingrediente.php?ingrediente=" + $(this).attr("id")
+  );
+});
+
+$("#update_ing").on("click", function (e) {
+  e.preventDefault();
+
+  if ($("#cantidad").val().length > 0 && $("#valor").val().length > 0) {
+    $.ajax({
+      url: "ajax/update_ingrediente.php",
+      data: $("#new_ingrediente").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Ingrediente y valor actualizados!");
           $(location).prop("href", "preparaciones.php");
         } else {
           alert("Error, intente nuevamente.");

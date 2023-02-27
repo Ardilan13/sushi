@@ -84,11 +84,13 @@ main {
   }
 }
 
-table button {
+table button,
+.edit {
   background-color: v.$verde !important;
 }
 
-table button:hover {
+table button:hover,
+.edit:hover {
   background-color: darken(v.$verde, 10) !important;
 }
 

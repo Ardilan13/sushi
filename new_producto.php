@@ -61,6 +61,7 @@ require_once 'includes/auth.php'; ?>
                                 <label for="precio">Precio:</label>
                                 <input type="number" id="precio" disabled name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
                             </div>
+                            <button type="submit" class="edit" id="btn_producir">Producir</button>
                             <button type="submit" id="btn_update_pro">Actualizar</button>
                     <?php }
                     } ?>
