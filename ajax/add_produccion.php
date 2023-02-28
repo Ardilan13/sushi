@@ -11,8 +11,7 @@ $cantidad = $_POST["cantidad"];
 
 $crear_prod = "INSERT INTO productos(nombre, tipo, unidad, cantidad) VALUES ('$nombre',$tipo,$unidad,$cantidad);";
 $resultado = mysqli_query($con, $crear_prod);
-echo $crear_prod;
-/* if ($resultado) {
+if ($resultado) {
     (float)$total1 = (float)$total - (float)$cantidad_pro1;
     $actualizar_prod = "UPDATE productos SET cantidad = $total1 WHERE id = $id";
     $resultado = mysqli_query($con, $actualizar_prod);
@@ -23,4 +22,4 @@ echo $crear_prod;
     }
 } else {
     echo 0;
-} */
+}
