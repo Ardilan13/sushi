@@ -1,5 +1,8 @@
 <?php require_once 'includes/header.php';
 require_once 'includes/auth.php';
+if ($_SESSION["id"] != 'admin') {
+    header('Location: productos.php');
+}
 require_once 'conexion.php';
 $con = conectar(); ?>
 <main>

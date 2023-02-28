@@ -20,14 +20,24 @@
         <h3>HaikoSushi</h3>
         <?php
         session_start();
-        if (isset($_SESSION["id"])) { ?>
-            <div class="pages">
-                <a href="productos.php">Productos</a>
-                <a href="compras.php">Compras</a>
-                <a href="movimientos.php">Movimientos</a>
-                <a href="preparaciones.php">Preparaciones</a>
-                <a href="ventas.php">Ventas</a>
-            </div>
-            <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>
-        <?php } ?>
+        if (isset($_SESSION["id"])) {
+            if ($_SESSION["id"] == "admin") { ?>
+                <div class="pages">
+                    <a href="productos.php">Productos</a>
+                    <a href="compras.php">Compras</a>
+                    <a href="movimientos.php">Movimientos</a>
+                    <a href="preparaciones.php">Preparaciones</a>
+                    <a href="ventas.php">Ventas</a>
+                </div>
+                <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>
+            <?php } else { ?>
+                <div class="pages">
+                    <a href="productos.php">Productos</a>
+                    <a href="compras.php">Compras</a>
+                    <a href="preparaciones.php">Preparaciones</a>
+                    <a href="ventas.php">Ventas</a>
+                </div>
+                <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>
+        <?php }
+        } ?>
     </header>
