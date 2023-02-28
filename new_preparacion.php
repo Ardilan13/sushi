@@ -88,6 +88,15 @@ require_once 'includes/auth.php'; ?>
                             <option value="2">Receta</option>
                         </select>
                     </div>
+                    <div class="input">
+                        <label for="unidad">Unidad:</label>
+                        <select name="unidad" id="unidad" required>
+                            <option></option>
+                            <option value="1">Kilogramos</option>
+                            <option value="2">Litros</option>
+                            <option value="3">Unidades</option>
+                        </select>
+                    </div>
                     <button type="submit" id="add_preparacion">Crear</button>
                 <?php } ?>
             </form>
