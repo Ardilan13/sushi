@@ -68,7 +68,7 @@ require_once 'includes/auth.php'; ?>
                             <button hidden id="clonar">clon</button>
 
                             <div class="input">
-                                <label for="valor">Valor:</label>
+                                <label for="valor">Costo:</label>
                                 <input disabled value="<?php echo $row['valor']; ?>" type="text" id="valor" name="nombre" required>
                             </div>
 
