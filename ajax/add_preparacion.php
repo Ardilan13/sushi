@@ -9,5 +9,5 @@ $resultado = mysqli_query($con, $crear_preparacion);
 if ($resultado == 1) {
     echo 1;
 } else {
-    echo 0;
+    echo $crear_preparacion;
 }
