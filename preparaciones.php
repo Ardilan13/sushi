@@ -14,6 +14,7 @@ $con = conectar(); ?>
                         <th class="mid">Codigo</th>
                         <th>Nombre</th>
                         <th>Tipo</th>
+                        <th>Cantidad</th>
                         <th>Valor</th>
                         <th>Edit</th>
                     </tr>
@@ -25,7 +26,16 @@ $con = conectar(); ?>
                     $login = "SELECT * FROM preparaciones ORDER BY id DESC";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
-                        while ($row = mysqli_fetch_assoc($resultado)) { ?>
+                        while ($row = mysqli_fetch_assoc($resultado)) {
+                            if ($row["unidad"] == 1) {
+                                $und = 'Kgs';
+                            } else if ($row["unidad"] == 2) {
+                                $und = 'Lts';
+                            } else  if ($row["unidad"] == 3) {
+                                $und = 'Und';
+                            } else {
+                                $und = null;
+                            } ?>
                             <tr>
                                 <td><?php echo $row["id"]; ?></td>
                                 <td><?php echo $row["nombre"]; ?></td>
@@ -36,6 +46,7 @@ $con = conectar(); ?>
                                         echo 'Receta';
                                     } ?>
                                 </td>
+                                <td><?php echo number_format($row["cantidad"], 1) . $und; ?></td>
                                 <td><?php echo number_format($row["valor"], 2); ?></td>
                                 <td class="mid">
                                     <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
