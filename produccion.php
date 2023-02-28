@@ -40,14 +40,18 @@ $id = $_GET['id'] ?? null; ?>
                             <input type="text" hidden value="<?php echo $id; ?>" name="id">
                             <input type="text" hidden value="<?php echo $row['cantidad']; ?>" id="test1" name="total1">
                             <div class="input">
+                                <label for="cantidad_pro_2" id="unidad_producto">Cantidad a usar:</label>
+                                <input type="number" id="cantidad_pro_2" name="cantidad_pro_2" min="0" required>
+                            </div>
+                            <div class="input">
                                 <label for="producto">Producto:</label>
                                 <select name="producto" id="producto" required>
                                     <!-- Generado por ajax list_product -->
                                 </select>
                             </div>
                             <div class="input">
-                                <label for="cantidad" id="unidad_producto">Cantidad a usar:</label>
-                                <input type="number" id="cantidad_pro_2" name="cantidad_pro_2" min="0" required>
+                                <label for="cantidad_new" id="unidad_producto">Cantidad:</label>
+                                <input type="number" id="cantidad_new" name="cantidad_new" min="0" required>
                             </div>
                             <button type="submit" id="update_produccion">Actualizar producto</button>
                         </form>
