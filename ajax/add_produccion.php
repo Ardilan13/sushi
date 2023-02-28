@@ -21,5 +21,5 @@ if ($resultado) {
         echo 2;
     }
 } else {
-    echo $resultado;
+    echo (string)$con->connect_error;
 }
