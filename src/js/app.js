@@ -129,7 +129,7 @@ $("#add_producto_pro").on("click", function (e) {
     $("#unidad").val().length > 0 &&
     $("#cantidad").val().length > 0
   ) {
-    if ($("#cantidad_pro_1").val() < $("#test").val()) {
+    if ($("#cantidad_pro_1").val() <= $("#test").val()) {
       $.ajax({
         url: "ajax/add_produccion.php",
         data: $("#new_producto_pro").serialize(),
@@ -163,7 +163,7 @@ $("#update_produccion").on("click", function (e) {
     $("#producto").val().length > 0 &&
     $("#cantidad_pro_2").val().length > 0
   ) {
-    if ($("#cantidad_pro_2").val() < $("#test1").val()) {
+    if ($("#cantidad_pro_2").val() <= $("#test1").val()) {
       $.ajax({
         url: "ajax/update_produccion.php",
         data: $("#update_producto_pro").serialize(),
