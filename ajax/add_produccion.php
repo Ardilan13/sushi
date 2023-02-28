@@ -9,7 +9,9 @@ $tipo = $_POST["tipo"];
 $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
 
-$crear_prod = "INSERT INTO productos(nombre, tipo, unidad, cantidad) VALUES ('$nombre',$tipo,$unidad,$cantidad);";
+echo $id . ',' . $cantidad_pro1 . ',' . $nombre . ',' . $tipo . ',' . $unidad . ',' . $cantidad;
+
+/* $crear_prod = "INSERT INTO productos(nombre, tipo, unidad, cantidad) VALUES ('$nombre',$tipo,$unidad,$cantidad);";
 $resultado = mysqli_query($con, $crear_prod);
 if ($resultado) {
     (float)$total1 = (float)$total - (float)$cantidad_pro1;
@@ -18,8 +20,8 @@ if ($resultado) {
     if ($resultado) {
         echo 1;
     } else {
-        echo 2;
+        echo 0;
     }
 } else {
-    echo (string)$con->connect_error;
-}
+    echo 0;
+} */
