@@ -21,5 +21,5 @@ if ($resultado) {
         echo 2;
     }
 } else {
-    echo 0;
+    echo $resultado;
 }
