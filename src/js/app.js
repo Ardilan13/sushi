@@ -216,6 +216,7 @@ $("#add_preparacion").on("click", function (e) {
           $(location).prop("href", "preparaciones.php");
         } else {
           alert("Error, intente nuevamente.");
+          alert(text);
         }
       },
       error: function (xhr, status, errorThrown) {
