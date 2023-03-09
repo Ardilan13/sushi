@@ -1,7 +1,7 @@
 <?php require_once '../conexion.php';
 $con = conectar();
 
-$list = "SELECT id,nombre,unidad from productos;";
+$list = "SELECT id,nombre,unidad from productos ORDER BY nombre ASC;";
 $resultado = mysqli_query($con, $list);
 if ($resultado->num_rows > 0) { ?>
     <option></option>

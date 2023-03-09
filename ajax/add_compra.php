@@ -17,12 +17,16 @@ if ($resultado) {
         $status = 0;
     } else if ($row['precio'] < $precio) {
         $status = 1;
+    } else {
+        $status = 2;
     }
     $total = (float)$row['cantidad'] + (float)$cantidad;
     $update_producto = "UPDATE productos SET status = $status, cantidad=$total, precio=$precio WHERE id = $producto;";
     $resultado_update = mysqli_query($con, $update_producto);
     if ($resultado_update) {
         echo 1;
+    } else {
+        echo $update_producto;
     }
 } else {
     echo 0;

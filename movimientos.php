@@ -44,7 +44,7 @@ $con = conectar(); ?>
                                     } ?>
                                 </td>
                                 <td><?php echo $row["fecha"]; ?></td>
-                                <td><?php echo number_format($row["cantidad"], 1) . ' ' . $und; ?></td>
+                                <td><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
                                 <td><?php echo $row["motivo"]; ?></td>
                             </tr>
                     <?php }

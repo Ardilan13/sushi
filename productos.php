@@ -15,9 +15,9 @@ $con = conectar(); ?>
                         <th>Tipo</th>
                         <th>Proveedor</th>
                         <th>Merma</th>
-                        <th>Precio</th>
+                        <th>Precio de Compra</th>
                         <th>Cantidad</th>
-                        <th>Total</th>
+                        <th>Precio Real</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
@@ -58,7 +58,7 @@ $con = conectar(); ?>
                                 <td><?php echo $row["proveedor"]; ?></td>
                                 <td class="min"><?php echo $row["merma"]; ?></td>
                                 <td class="precio status_<?php echo $row['status']; ?>"><?php echo number_format($row["precio"], 2); ?></td>
-                                <td class="mid"><?php echo number_format($row["cantidad"], 1) . ' ' . $und; ?></td>
+                                <td class="mid"><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
                                 <td class="precio"><?php echo number_format($total, 2); ?></td>
                                 <td class="min">
                                     <button class="edit edit_pro" id="<?php echo $row["id"]; ?>">

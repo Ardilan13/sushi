@@ -52,7 +52,7 @@ $("#add_producto").on("click", function (e) {
           $(location).prop("href", "productos.php");
         } else {
           alert("Error, intente nuevamente.");
-          console(text);
+          alert(text);
         }
       },
       error: function (xhr, status, errorThrown) {
@@ -339,7 +339,7 @@ $("#update_ing").on("click", function (e) {
 $("#new_com").on("click", function (e) {
   e.preventDefault();
 
-  $(location).prop("href", "new_compra.php?");
+  $(location).prop("href", "new_compra.php");
 });
 
 //Ajax que genera una nueva compra
@@ -359,6 +359,43 @@ $("#add_compra").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Compra generada y producto actualizado!");
+          $(location).prop("href", "compras.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$(".edit_com").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "new_compra.php?id=" + $(this).attr("id"));
+});
+
+$("#btn_update_com").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#id").val().length > 0 &&
+    $("#cantidad").val().length > 0 &&
+    $("#precio").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/update_compra.php",
+      data: $("#new_compra").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Compra Actualizada!");
           $(location).prop("href", "compras.php");
         } else {
           alert("Error, intente nuevamente.");

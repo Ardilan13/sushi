@@ -46,7 +46,7 @@ $con = conectar(); ?>
                                         echo 'Receta';
                                     } ?>
                                 </td>
-                                <td><?php echo number_format($row["cantidad"], 1) . $und; ?></td>
+                                <td><?php echo number_format($row["cantidad"], 2) . $und; ?></td>
                                 <td><?php echo number_format($row["valor"], 2); ?></td>
                                 <td class="mid">
                                     <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
