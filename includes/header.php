@@ -24,6 +24,7 @@
             if ($_SESSION["id"] == "admin") { ?>
                 <div class="pages">
                     <a href="productos.php">Productos</a>
+                    <a href="listado.php">Listado</a>
                     <a href="compras.php">Compras</a>
                     <a href="movimientos.php">Movimientos</a>
                     <a href="preparaciones.php">Preparaciones</a>

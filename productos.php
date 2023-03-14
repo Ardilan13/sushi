@@ -79,6 +79,7 @@ $con = conectar(); ?>
             <button hidden id="clonar">clon</button>
 
             <div class="botones">
+                <button class="des_exc">Descargar Excel</button>
                 <button id="new_pro">Nuevo Producto</button>
             </div>
         </div>
