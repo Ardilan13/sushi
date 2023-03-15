@@ -41,18 +41,12 @@ $con = conectar(); ?>
                             <tr>
                                 <td><?php echo $row["nombre"]; ?></td>
                                 <td class="mid">
-                                    <?php if ($row["tipo"] == 1) {
-                                        echo 'Abarrotes';
-                                    } else if ($row["tipo"] == 2) {
-                                        echo 'F & V';
-                                    } else if ($row["tipo"] == 3) {
-                                        echo 'Peces';
-                                    } else if ($row["tipo"] == 4) {
-                                        echo 'Carnes';
-                                    } else if ($row["tipo"] == 5) {
-                                        echo 'Lacteos';
-                                    } else {
-                                        echo 'Empaque';
+                                    <?php $tipo = "SELECT * from tipo where id = {$row["tipo"]} LIMIT 1;";
+                                    $resultado2 = mysqli_query($con, $tipo);
+                                    if ($resultado2->num_rows > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($resultado2)) {
+                                            echo $row2["nombre"];
+                                        }
                                     } ?>
                                 </td>
                                 <td><?php echo $row["proveedor"]; ?></td>
@@ -79,7 +73,9 @@ $con = conectar(); ?>
             <button hidden id="clonar">clon</button>
 
             <div class="botones">
-                <button class="des_exc">Descargar Excel</button>
+                <?php if ($_SESSION["id"] == 'admin') { ?>
+                    <button class="des_exc">Descargar Excel</button>
+                <?php } ?>
                 <button id="new_pro">Nuevo Producto</button>
             </div>
         </div>

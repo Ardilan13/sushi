@@ -74,12 +74,13 @@ $id = $_GET['id'] ?? null; ?>
                                 <label for="tipo">Tipo:</label>
                                 <select name="tipo" id="tipo" required>
                                     <option></option>
-                                    <option value="1">Abarrotes</option>
-                                    <option value="2">Frutas y Verduras</option>
-                                    <option value="3">Pescados y Mariscos</option>
-                                    <option value="4">Carnes</option>
-                                    <option value="5">Lacteos</option>
-                                    <option value="6">Empaques</option>
+                                    <?php $tipo = "SELECT * from tipo";
+                                    $resultado2 = mysqli_query($con, $tipo);
+                                    if ($resultado2->num_rows > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($resultado2)) { ?>
+                                            <option value="<?php echo $row2['id'] ?>"><?php echo $row2['nombre'] ?></option>
+                                    <?php }
+                                    } ?>
                                 </select>
                             </div>
                             <div class="input">

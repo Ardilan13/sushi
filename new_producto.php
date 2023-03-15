@@ -1,5 +1,7 @@
 <?php require_once 'includes/header.php';
-require_once 'includes/auth.php'; ?>
+require_once 'includes/auth.php';
+require_once 'conexion.php';
+$con = conectar(); ?>
 <main>
     <div class="container">
         <div class="header">
@@ -12,8 +14,6 @@ require_once 'includes/auth.php'; ?>
         <div class="info">
             <form id="new_producto">
                 <?php if (isset($_GET["id"])) {
-                    require_once 'conexion.php';
-                    $con = conectar();
                     $id = $_GET["id"];
                     $get_producto = "SELECT * from productos WHERE id = $id;";
                     $resultado = mysqli_query($con, $get_producto);
@@ -28,12 +28,15 @@ require_once 'includes/auth.php'; ?>
                                 <label for="tipo">Tipo:</label>
                                 <select name="tipo" id="tipo" required>
                                     <option></option>
-                                    <option <?php if ($row["tipo"] == 1) { ?> selected <?php }; ?> value="1">Abarrotes</option>
-                                    <option <?php if ($row["tipo"] == 2) { ?> selected <?php }; ?> value="2">Frutas y Verduras</option>
-                                    <option <?php if ($row["tipo"] == 3) { ?> selected <?php }; ?> value="3">Pescados y Mariscos</option>
-                                    <option <?php if ($row["tipo"] == 4) { ?> selected <?php }; ?> value="4">Carnes</option>
-                                    <option <?php if ($row["tipo"] == 5) { ?> selected <?php }; ?> value="5">Lacteos</option>
-                                    <option <?php if ($row["tipo"] == 6) { ?> selected <?php }; ?> value="6">Empaques</option>
+                                    <?php $tipo = "SELECT * from tipo";
+                                    $resultado2 = mysqli_query($con, $tipo);
+                                    if ($resultado2->num_rows > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($resultado2)) { ?>
+                                            <option <?php if ($row2['id'] == $row['tipo']) {
+                                                        echo ' selected';
+                                                    } ?> value="<?php echo $row2['id'] ?>"> <?php echo $row2['nombre'] ?> </option>
+                                    <?php }
+                                    } ?>
                                 </select>
                             </div>
                             <div class="input">
@@ -74,12 +77,13 @@ require_once 'includes/auth.php'; ?>
                         <label for="tipo">Tipo:</label>
                         <select name="tipo" id="tipo" required>
                             <option></option>
-                            <option value="1">Abarrotes</option>
-                            <option value="2">Frutas y Verduras</option>
-                            <option value="3">Pescados y Mariscos</option>
-                            <option value="4">Carnes</option>
-                            <option value="5">Lacteos</option>
-                            <option value="6">Empaques</option>
+                            <?php $tipo = "SELECT * from tipo";
+                            $resultado2 = mysqli_query($con, $tipo);
+                            if ($resultado2->num_rows > 0) {
+                                while ($row2 = mysqli_fetch_assoc($resultado2)) { ?>
+                                    <option value="<?php echo $row2['id'] ?>"><?php echo $row2['nombre'] ?></option>
+                            <?php }
+                            } ?>
                         </select>
                     </div>
                     <div class="input">

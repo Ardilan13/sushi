@@ -64,6 +64,70 @@ $("#add_producto").on("click", function (e) {
   }
 });
 
+$(".edit_tipo").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "new_tipo.php?id=" + $(this).attr("id"));
+});
+
+$("#new_tipo").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "new_tipo.php");
+});
+
+$("#add_tipo").on("click", function (e) {
+  e.preventDefault();
+
+  if ($("#nombre").val().length > 0) {
+    $.ajax({
+      url: "ajax/add_tipo.php",
+      data: $("#new_tipos").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Tipo Creado!");
+          $(location).prop("href", "tipos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          alert(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$("#btn_update_tipo").on("click", function (e) {
+  e.preventDefault();
+
+  if ($("#nombre").val().length > 0) {
+    $.ajax({
+      url: "ajax/add_tipo.php",
+      data: $("#new_tipos").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Tipo Actualizado!");
+          $(location).prop("href", "tipos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
 //accede al menu actualizar producto y le pasa el id por metodo GET
 $(".edit_pro").on("click", function (e) {
   e.preventDefault();
@@ -274,6 +338,37 @@ $("#new_ing").on("click", function (e) {
   $(location).prop("href", "new_ingrediente.php?id=" + $("#id").val());
 });
 
+$("#save_pre").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#unidad").val().length > 0 &&
+    $("#nombre").val().length > 0 &&
+    $("#cantidad").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/update_preparacion.php",
+      data: $("#new_preparacion").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Preparacion actualizada!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
 $("#add_ing").on("click", function (e) {
   e.preventDefault();
 
@@ -312,6 +407,43 @@ $(".edit_pre_pro").on("click", function (e) {
     "href",
     "new_ingrediente.php?ingrediente=" + $(this).attr("id")
   );
+});
+
+$(".add_pre_rec").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "new_receta_pre.php?id=" + $(this).attr("id"));
+});
+
+$("#add_pre").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#cantidad_pre").val().length > 0 &&
+    $("#valor_pre").val().length > 0 &&
+    $("#preparacion").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/add_ingrediente.php",
+      data: $("#new_preparacion_receta").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Preparacion agregada!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          alert(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
 });
 
 $("#update_ing").on("click", function (e) {
@@ -453,6 +585,46 @@ $("#producto").change(function () {
         $("#cantidad").attr("precio", data.valor);
         $("#cantidad").val("");
         $("#valor").val("");
+      }
+    },
+  });
+});
+
+$("#preparacion").change(function () {
+  //poner que tipo de unidad es el producto
+  var unidad = $("#preparacion option:selected").attr("unidad");
+  switch (unidad) {
+    case "1":
+      resultado = " en Kgs:";
+      break;
+    case "2":
+      resultado = " en Lts:";
+      break;
+    case "3":
+      resultado = " en Und:";
+      break;
+    default:
+      resultado = ":";
+  }
+  $("#unidad_producto").html("Cantidad" + resultado);
+
+  //poner el precio y cantidad anterior de ese producto
+  var preparacion = $("#preparacion option:selected").val();
+  $.ajax({
+    url: "ajax/get_data_preparacion.php",
+    data: "id=" + preparacion,
+    type: "GET",
+    dataType: "text",
+    success: function (text) {
+      if (text != 0) {
+        //traen los datos en un json y se muestran en los placeholder
+        var data = $.parseJSON(text);
+        $("#valor_pre").attr("placeholder", data.valor);
+        $("#cantidad_pre").attr("placeholder", data.cantidad);
+        $("#cantidad_pre").val("");
+        $("#valor_pre").val("");
+      } else {
+        console.log(text);
       }
     },
   });
