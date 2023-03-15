@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-03-2023 a las 21:01:12
+-- Tiempo de generación: 15-03-2023 a las 15:04:36
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -80,11 +80,22 @@ INSERT INTO `compra` (`id`, `id_producto`, `fecha`, `cantidad`, `precio`) VALUES
 
 CREATE TABLE `cuentas` (
   `id` int(100) NOT NULL,
+  `tipo` int(1) NOT NULL,
   `id_preparacion` int(100) NOT NULL,
   `id_diario` int(100) NOT NULL,
   `cantidad` double(11,2) NOT NULL,
   `valor` double(50,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cuentas`
+--
+
+INSERT INTO `cuentas` (`id`, `tipo`, `id_preparacion`, `id_diario`, `cantidad`, `valor`) VALUES
+(1, 1, 1, 6, 12.00, 1111.00),
+(2, 0, 5, 6, 12.00, 342.00),
+(3, 0, 1, 5, 12.00, 5.00),
+(4, 0, 8, 5, 5.00, 10.00);
 
 -- --------------------------------------------------------
 
@@ -98,6 +109,18 @@ CREATE TABLE `diario` (
   `valor` double(50,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `diario`
+--
+
+INSERT INTO `diario` (`id`, `fecha`, `valor`) VALUES
+(1, '2023-03-14', 12000.00),
+(2, '2023-03-13', 10000.00),
+(3, '0000-00-00', 0.00),
+(4, '0000-00-00', 0.00),
+(5, '2023-03-15', 15.00),
+(6, '2023-03-15', 0.00);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +129,7 @@ CREATE TABLE `diario` (
 
 CREATE TABLE `ingredientes` (
   `id` int(100) NOT NULL,
+  `tipo` int(1) NOT NULL,
   `id_preparacion` int(100) NOT NULL,
   `id_producto` int(100) NOT NULL,
   `cantidad` int(100) NOT NULL,
@@ -116,18 +140,24 @@ CREATE TABLE `ingredientes` (
 -- Volcado de datos para la tabla `ingredientes`
 --
 
-INSERT INTO `ingredientes` (`id`, `id_preparacion`, `id_producto`, `cantidad`, `valor`) VALUES
-(1, 1, 1, 1, 1),
-(2, 1, 2, 100, 15000200),
-(3, 1, 5, 12, 48),
-(4, 1, 6, 1, 1),
-(5, 2, 1, 10, 20),
-(6, 2, 5, 5, 20),
-(7, 3, 1, 120, 240),
-(8, 1, 3, 2, 50800),
-(9, 4, 2, 200, 30000400),
-(10, 7, 2, 0, 15000.2),
-(11, 6, 13, 1, 35);
+INSERT INTO `ingredientes` (`id`, `tipo`, `id_preparacion`, `id_producto`, `cantidad`, `valor`) VALUES
+(1, 0, 1, 1, 1, 1),
+(2, 0, 1, 2, 100, 15000200),
+(3, 0, 1, 5, 12, 48),
+(4, 0, 1, 6, 1, 1),
+(5, 0, 2, 1, 10, 20),
+(6, 0, 2, 5, 5, 20),
+(7, 0, 3, 1, 120, 240),
+(8, 0, 1, 3, 2, 50800),
+(9, 0, 4, 2, 200, 30000400),
+(10, 0, 7, 2, 0, 15000.2),
+(11, 0, 6, 13, 1, 35),
+(12, 0, 1, 1, 11, 33),
+(13, 0, 1, 9, 1, 12),
+(14, 1, 6, 7, 5, 100),
+(15, 1, 6, 1, 12, 12),
+(16, 1, 6, 1, 1, 13),
+(17, 0, 6, 1, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -183,12 +213,12 @@ CREATE TABLE `preparaciones` (
 --
 
 INSERT INTO `preparaciones` (`id`, `nombre`, `tipo`, `unidad`, `cantidad`, `valor`) VALUES
-(1, 'prueba', 1, 0, NULL, 15051000.00),
-(2, 'prueba', 1, 0, NULL, 40.00),
-(3, 'prueba', 1, 0, NULL, 240.00),
-(4, 'preparacion', 1, 0, NULL, 30000400.00),
+(1, 'prueba_dilan', 1, 2, 12.00, 15051045.00),
+(2, 'prueba', 1, 2, NULL, 40.00),
+(3, 'prueba', 1, 2, NULL, 240.00),
+(4, 'preparacion', 1, 3, NULL, 30000400.00),
 (5, 'hola', 1, 1, NULL, NULL),
-(6, 'asda', 2, 2, NULL, 35.00),
+(6, 'asda', 2, 2, 100.00, 61.00),
 (7, 'bolsa de arroz 1 kg', 1, 1, NULL, 15000.20);
 
 -- --------------------------------------------------------
@@ -238,6 +268,30 @@ INSERT INTO `productos` (`id`, `nombre`, `status`, `tipo`, `proveedor`, `unidad`
 (23, 'dilan', NULL, 4, NULL, 2, 0, 250.00, NULL),
 (24, 'nfdesjewksd', NULL, 1, NULL, 3, 0, 10.00, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo`
+--
+
+CREATE TABLE `tipo` (
+  `id` int(10) NOT NULL,
+  `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo`
+--
+
+INSERT INTO `tipo` (`id`, `nombre`) VALUES
+(1, 'Abarrotes'),
+(2, 'Frutas y Verduras'),
+(3, 'Pescados y Mariscos'),
+(4, 'Carnes'),
+(5, 'Lacteos'),
+(6, 'Empaques'),
+(8, 'prueba123');
+
 --
 -- Índices para tablas volcadas
 --
@@ -254,8 +308,7 @@ ALTER TABLE `compra`
 --
 ALTER TABLE `cuentas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cuentas_diarias` (`id_diario`),
-  ADD KEY `preparaciones_diarias` (`id_preparacion`);
+  ADD KEY `cuentas_diarias` (`id_diario`);
 
 --
 -- Indices de la tabla `diario`
@@ -268,7 +321,6 @@ ALTER TABLE `diario`
 --
 ALTER TABLE `ingredientes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `producto_preparacion` (`id_producto`),
   ADD KEY `preparacion` (`id_preparacion`);
 
 --
@@ -291,6 +343,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tipo`
+--
+ALTER TABLE `tipo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -304,19 +362,19 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `diario`
 --
 ALTER TABLE `diario`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
@@ -337,6 +395,12 @@ ALTER TABLE `productos`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo`
+--
+ALTER TABLE `tipo`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -350,15 +414,13 @@ ALTER TABLE `compra`
 -- Filtros para la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  ADD CONSTRAINT `cuentas_diarias` FOREIGN KEY (`id_diario`) REFERENCES `diario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `preparaciones_diarias` FOREIGN KEY (`id_preparacion`) REFERENCES `preparaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cuentas_diarias` FOREIGN KEY (`id_diario`) REFERENCES `diario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  ADD CONSTRAINT `preparacion` FOREIGN KEY (`id_preparacion`) REFERENCES `preparaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `producto_preparacion` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `preparacion` FOREIGN KEY (`id_preparacion`) REFERENCES `preparaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `movimientos`
