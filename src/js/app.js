@@ -134,6 +134,16 @@ $(".edit_pro").on("click", function (e) {
   $(location).prop("href", "new_producto.php?id=" + $(this).attr("id"));
 });
 
+$(".edit_ventas").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "new_venta.php?id=" + $(this).attr("id"));
+});
+
+$(".new_ven").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "new_venta.php");
+});
+
 //Ajax actualiza el producto seleccionado
 $("#btn_update_pro").on("click", function (e) {
   e.preventDefault();
