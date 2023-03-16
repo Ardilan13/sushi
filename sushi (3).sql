@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2023 a las 15:04:36
+-- Tiempo de generación: 16-03-2023 a las 17:09:13
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -70,7 +70,13 @@ INSERT INTO `compra` (`id`, `id_producto`, `fecha`, `cantidad`, `precio`) VALUES
 (30, 1, '2023-03-09', 1.0, 2.00),
 (31, 1, '2023-03-09', 2.0, 2.00),
 (32, 1, '2023-03-09', 2.0, 2.00),
-(33, 1, '2023-03-09', 12.0, 3.00);
+(33, 1, '2023-03-09', 12.0, 3.00),
+(34, 5, '2023-03-15', 2.0, 8.00),
+(35, 5, '0000-00-00', 2.0, 2.00),
+(36, 1, '0000-00-00', 12.0, 12.00),
+(37, 5, '0000-00-00', 12.0, 12.00),
+(38, 5, '2023-03-31', 12.0, 12.00),
+(39, 1, '2023-03-31', 12.0, 144.00);
 
 -- --------------------------------------------------------
 
@@ -95,7 +101,20 @@ INSERT INTO `cuentas` (`id`, `tipo`, `id_preparacion`, `id_diario`, `cantidad`, 
 (1, 1, 1, 6, 12.00, 1111.00),
 (2, 0, 5, 6, 12.00, 342.00),
 (3, 0, 1, 5, 12.00, 5.00),
-(4, 0, 8, 5, 5.00, 10.00);
+(4, 0, 8, 5, 5.00, 10.00),
+(5, 1, 6, 6, 12.00, 12.00),
+(6, 0, 13, 7, 12.00, 2.00),
+(7, 0, 11, 7, 1.00, 2.00),
+(8, 0, 20, 7, 1.00, 5.00),
+(9, 0, 5, 9, 49.00, 6575765.00),
+(10, 0, 5, 9, 50.00, 1.00),
+(11, 0, 5, 9, 4.00, 7.00),
+(12, 0, 2, 8, 999999999.00, 34.00),
+(13, 0, 5, 7, 48.00, 2.00),
+(14, 1, 6, 3, 12.00, 12.00),
+(15, 0, 19, 6, 12.00, 1.00),
+(16, 0, 23, 10, 10.00, 12.00),
+(17, 1, 8, 10, 10.00, 12.00);
 
 -- --------------------------------------------------------
 
@@ -106,20 +125,25 @@ INSERT INTO `cuentas` (`id`, `tipo`, `id_preparacion`, `id_diario`, `cantidad`, 
 CREATE TABLE `diario` (
   `id` int(100) NOT NULL,
   `fecha` date NOT NULL,
-  `valor` double(50,2) NOT NULL
+  `valor` double(50,2) NOT NULL,
+  `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `diario`
 --
 
-INSERT INTO `diario` (`id`, `fecha`, `valor`) VALUES
-(1, '2023-03-14', 12000.00),
-(2, '2023-03-13', 10000.00),
-(3, '0000-00-00', 0.00),
-(4, '0000-00-00', 0.00),
-(5, '2023-03-15', 15.00),
-(6, '2023-03-15', 0.00);
+INSERT INTO `diario` (`id`, `fecha`, `valor`, `status`) VALUES
+(1, '2023-03-14', 12000.00, 1),
+(2, '2023-03-13', 10000.00, NULL),
+(3, '0000-00-00', 12.00, NULL),
+(4, '0000-00-00', 0.00, NULL),
+(5, '2023-03-15', 15.00, NULL),
+(6, '2023-03-15', 13.00, NULL),
+(7, '2023-03-31', 11.00, NULL),
+(8, '2023-03-16', 34.00, NULL),
+(9, '2023-03-31', 6575773.00, NULL),
+(10, '2023-03-30', 24.00, 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +181,9 @@ INSERT INTO `ingredientes` (`id`, `tipo`, `id_preparacion`, `id_producto`, `cant
 (14, 1, 6, 7, 5, 100),
 (15, 1, 6, 1, 12, 12),
 (16, 1, 6, 1, 1, 13),
-(17, 0, 6, 1, 10, 1);
+(17, 0, 6, 1, 10, 1),
+(18, 0, 8, 23, 10, 12),
+(19, 1, 8, 8, 10, 12);
 
 -- --------------------------------------------------------
 
@@ -191,7 +217,9 @@ INSERT INTO `movimientos` (`id`, `id_producto`, `tipo`, `fecha`, `cantidad`, `mo
 (10, 1, 0, '2023-02-27', 25.00, 'Jsjd'),
 (11, 2, 0, '2023-02-27', 2555.00, 'm,k'),
 (12, 1, 0, '2023-02-27', 58.00, 'OBSEQUIO'),
-(13, 3, 1, '2023-02-27', 5.00, 'dañado cocina');
+(13, 3, 1, '2023-02-27', 5.00, 'dañado cocina'),
+(14, 14, 0, '2023-03-31', 12.00, '121212'),
+(15, 1, 1, '2023-03-30', 51.00, 'siiii');
 
 -- --------------------------------------------------------
 
@@ -219,7 +247,8 @@ INSERT INTO `preparaciones` (`id`, `nombre`, `tipo`, `unidad`, `cantidad`, `valo
 (4, 'preparacion', 1, 3, NULL, 30000400.00),
 (5, 'hola', 1, 1, NULL, NULL),
 (6, 'asda', 2, 2, 100.00, 61.00),
-(7, 'bolsa de arroz 1 kg', 1, 1, NULL, 15000.20);
+(7, 'bolsa de arroz 1 kg', 1, 1, NULL, 15000.20),
+(8, 'prueba_venta', 2, 1, 11.00, 24.00);
 
 -- --------------------------------------------------------
 
@@ -244,28 +273,28 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `status`, `tipo`, `proveedor`, `unidad`, `merma`, `cantidad`, `precio`) VALUES
-(1, 'arroz_123', 1, 3, 'a', 2, 1, 39.00, 3.00),
-(2, 'cxarne', 0, 4, '1', 2, 0, 126716.00, 150002.00),
-(3, 'b', NULL, 2, 'a', 3, 1, 11.00, 25400.00),
-(5, 'arroz', NULL, 1, 'a', 1, 0, 20.00, 4.00),
-(6, 'prueba', NULL, 1, '1', 1, 0, 1.00, 1.00),
+(1, 'arroz_123', 1, 3, 'a', 2, 1, -132.00, 144.00),
+(2, 'cxarne', 0, 4, '1', 2, 0, 126608.00, 150002.00),
+(3, 'b', NULL, 2, 'a', 3, 1, -61.00, 25400.00),
+(5, 'arroz', 2, 1, 'a', 1, 0, -72.00, 12.00),
+(6, 'prueba', NULL, 1, '1', 1, 0, -71.00, 1.00),
 (7, 'prueba', NULL, 2, '', 1, 0, 12.00, 0.00),
-(8, 'dilan11', NULL, 1, '', 1, 0, 2.00, 0.00),
-(9, 'dilan112', NULL, 1, '', 1, 0, 0.00, 0.00),
+(8, 'dilan11', NULL, 1, '', 1, 0, -8.00, 0.00),
+(9, 'dilan112', NULL, 1, '', 1, 0, -72.00, 0.00),
 (10, 'prueba', NULL, 1, '', 1, 0, 12.00, 0.00),
 (11, 'juan', NULL, 2, '', 1, 0, 12.00, 0.00),
 (12, 'hola', NULL, 1, '', 1, 0, 100.00, 0.00),
 (13, 'prueba', NULL, 1, '', 1, 0, 12.00, 0.00),
-(14, 'prueba', NULL, 2, '', 1, 0, 12.00, 0.00),
+(14, 'prueba', NULL, 2, '', 1, 0, 24.00, 0.00),
 (15, 'juan', NULL, 1, '', 1, 0, 0.00, 0.00),
 (16, 'prueba', NULL, 1, NULL, 1, 0, 35.00, NULL),
 (17, 'produccion', NULL, 6, NULL, 3, 0, 10.00, NULL),
 (18, 'prueba', NULL, 2, NULL, 1, 0, 12.00, NULL),
-(19, 'bolsa de arroz 1 kg', NULL, 1, NULL, 3, 0, 1.00, NULL),
+(19, 'bolsa de arroz 1 kg', NULL, 1, NULL, 3, 0, -47.00, NULL),
 (20, 'jfnajnkdanj', NULL, 2, NULL, 2, 0, 11.00, NULL),
 (21, 'dilan', NULL, 2, NULL, 1, 0, 10.00, NULL),
 (22, 'dilan', NULL, 1, NULL, 1, 0, 100.00, NULL),
-(23, 'dilan', NULL, 4, NULL, 2, 0, 250.00, NULL),
+(23, 'dilan', NULL, 4, NULL, 2, 0, 220.00, NULL),
 (24, 'nfdesjewksd', NULL, 1, NULL, 3, 0, 10.00, NULL);
 
 -- --------------------------------------------------------
@@ -356,37 +385,37 @@ ALTER TABLE `tipo`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `diario`
 --
 ALTER TABLE `diario`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `preparaciones`
 --
 ALTER TABLE `preparaciones`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

@@ -12,6 +12,7 @@ $con = conectar(); ?>
                 <thead>
                     <tr>
                         <th class="mid">ID</th>
+                        <th>Estado</th>
                         <th>Dia</th>
                         <th>Mes</th>
                         <th>Año</th>
@@ -30,6 +31,7 @@ $con = conectar(); ?>
                             $ano = date("Y", strtotime($row["fecha"])); ?>
                             <tr>
                                 <td><?php echo $row["id"]; ?></td>
+                                <td><?php echo $row["status"] != 1 ? 'Abierto' : 'Cerrado'; ?></td>
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>

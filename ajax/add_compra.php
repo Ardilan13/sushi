@@ -5,7 +5,7 @@ $producto = $_POST["producto"];
 $fecha = date_create($_POST["fecha"]);
 $fecha = date_format($fecha, "Y-m-d");
 $cantidad = $_POST["cantidad"];
-$precio = $_POST["precio"];
+$precio = $_POST["valor"];
 $status = null;
 
 $crear_compra = "INSERT INTO compra(id_producto, fecha, cantidad, precio) VALUES ($producto,'$fecha',$cantidad,$precio);";

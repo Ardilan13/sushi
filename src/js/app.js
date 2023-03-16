@@ -152,72 +152,18 @@ $("#agg_producto1").on("click", function (e) {
 $("#agg_producto").on("click", function (e) {
   e.preventDefault();
 
-  $.ajax({
-    url: "ajax/create_venta.php",
-    data: { fecha: $("#fecha").val() },
-    type: "POST",
-    dataType: "text",
-    success: function (text) {
-      if (text != 0) {
-        $(location).prop("href", "create_producto.php?id=" + text);
-      } else {
-        alert("Error, intente nuevamente.");
-        console.log(text);
-      }
-    },
-    error: function (xhr, status, errorThrown) {
-      alert("Error");
-    },
-  });
-});
-
-$("#agg_receta1").on("click", function (e) {
-  e.preventDefault();
-  $(location).prop("href", "create_receta.php?id=" + $(this).val());
-});
-
-$("#agg_receta").on("click", function (e) {
-  e.preventDefault();
-
-  $.ajax({
-    url: "ajax/create_venta.php",
-    data: { fecha: $("#fecha").val() },
-    type: "POST",
-    dataType: "text",
-    success: function (text) {
-      if (text != 0) {
-        $(location).prop("href", "create_receta.php?id=" + text);
-      } else {
-        alert("Error, intente nuevamente.");
-        console.log(text);
-      }
-    },
-    error: function (xhr, status, errorThrown) {
-      alert("Error");
-    },
-  });
-});
-
-$("#agg_producto_venta").on("click", function (e) {
-  e.preventDefault();
-
-  if (
-    $("#producto").val().length > 0 &&
-    $("#cantidad").val().length > 0 &&
-    $("#precio").val().length > 0
-  ) {
+  if ($("#fecha").val().length > 0) {
     $.ajax({
       url: "ajax/create_venta.php",
-      data: $("#new_producto_venta").serialize(),
+      data: { fecha: $("#fecha").val() },
       type: "POST",
       dataType: "text",
       success: function (text) {
-        if (text == 1) {
-          alert("Producto Agregado a venta!");
-          $(location).prop("href", "ventas.php");
+        if (text != 0) {
+          $(location).prop("href", "create_producto.php?id=" + text);
         } else {
           alert("Error, intente nuevamente.");
-          console(text);
+          console.log(text);
         }
       },
       error: function (xhr, status, errorThrown) {
@@ -229,13 +175,117 @@ $("#agg_producto_venta").on("click", function (e) {
   }
 });
 
+$("#agg_receta1").on("click", function (e) {
+  e.preventDefault();
+  $(location).prop("href", "create_receta.php?id=" + $(this).val());
+});
+
+$("#agg_receta").on("click", function (e) {
+  e.preventDefault();
+  if ($("#fecha").val().length > 0) {
+    $.ajax({
+      url: "ajax/create_venta.php",
+      data: { fecha: $("#fecha").val() },
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text != 0) {
+          $(location).prop("href", "create_receta.php?id=" + text);
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$("#agg_producto_venta").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#producto").val().length > 0 &&
+    $("#cantidad").val().length > 0 &&
+    $("#valor").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/verificar_cantidad.php",
+      data: $("#new_producto_venta").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          $.ajax({
+            url: "ajax/create_venta.php",
+            data: $("#new_producto_venta").serialize(),
+            type: "POST",
+            dataType: "text",
+            success: function (text1) {
+              if (text1 == 1) {
+                alert("Producto Agregado a venta!");
+                $(location).prop("href", "ventas.php");
+              } else {
+                alert("Error, intente nuevamente.");
+                console(text1);
+              }
+            },
+            error: function (xhr, status, errorThrown) {
+              alert("Error");
+            },
+          });
+        } else {
+          alert(
+            "La cantidad de la salida " +
+              $("#cantidad").val() +
+              " no puede ser mayor a " +
+              text
+          );
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
+$("#agg_venta").on("click", function (e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/guardar_venta.php",
+    data: $("#new_venta").serialize(),
+    type: "POST",
+    dataType: "text",
+    success: function (text) {
+      if (text > 110) {
+        alert("Venta guardada!");
+        $(location).prop("href", "ajax/descargar_excel.php");
+      } else {
+        alert("Error, intente nuevamente.");
+        console.log(text);
+      }
+    },
+    error: function (xhr, status, errorThrown) {
+      alert("Error");
+    },
+  });
+});
+
 $("#agg_receta_venta").on("click", function (e) {
   e.preventDefault();
 
   if (
     $("#receta").val().length > 0 &&
     $("#cantidad").val().length > 0 &&
-    $("#precio").val().length > 0
+    $("#valor").val().length > 0
   ) {
     $.ajax({
       url: "ajax/create_venta.php",
@@ -614,7 +664,7 @@ $("#add_compra").on("click", function (e) {
     $("#producto").val().length > 0 &&
     $("#fecha").val().length > 0 &&
     $("#cantidad").val().length > 0 &&
-    $("#precio").val().length > 0
+    $("#valor").val().length > 0
   ) {
     $.ajax({
       url: "ajax/add_compra.php",

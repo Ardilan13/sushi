@@ -62,28 +62,8 @@ $con = conectar(); ?>
                                                     <tr>
                                                         <td><?php echo $row2['nombre']; ?></td>
                                                         <td><?php echo $tipo; ?></td>
-                                                        <td class="mid"><?php echo $row2['cantidad'] . " " . $und ?></td>
-                                                        <td id="valor_ing"><?php echo $row2['valor']; ?></td>
-                                                        <!-- <td class="mid">
-                                                            <?php if ($row2["tipo"] == 0) { ?>
-                                                                <button class="edit edit_pre_pro" id="<?php echo $row2["id"]; ?>">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                        <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                                                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                                                                    </svg>
-                                                                </button>
-                                                            <?php } else { ?>
-                                                                <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                                        <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                                                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                                                                    </svg>
-                                                                </button>
-                                                            <?php } ?>
-
-                                                        </td> -->
+                                                        <td class="mid"><?php echo number_format($row2['cantidad'], 2) . " " . $und ?></td>
+                                                        <td id="valor_ing"><?php echo number_format($row2['valor'], 2); ?></td>
                                                     </tr>
                                             <?php }
                                             } ?>
@@ -97,9 +77,12 @@ $con = conectar(); ?>
                                 <input disabled value="<?php echo $row['valor']; ?>" type="text" id="nombre" name="nombre" required>
                             </div>
 
-                            <button type="submit" class="edit" value="<?php echo $id; ?>" id="agg_producto1">Agregar Producto</button>
-                            <button type="submit" value="<?php echo $id; ?>" id="agg_receta1">Agregar Receta</button>
-                            <button type="submit" id="agg_venta">Guardar</button>
+                            <?php if ($row['status'] != 1) { ?>
+                                <button type="submit" class="edit" value="<?php echo $id; ?>" id="agg_producto1">Agregar Producto</button>
+                                <button type="submit" value="<?php echo $id; ?>" id="agg_receta1">Agregar Receta</button>
+                                <button type="submit" id="agg_venta">Guardar</button>
+                            <?php } ?>
+
                     <?php }
                     } ?>
                 <?php } else { ?>

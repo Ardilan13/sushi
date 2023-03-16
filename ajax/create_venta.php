@@ -20,7 +20,7 @@ if ($id == null) {
     }
 } else if ($producto != null) {
     $cantidad = $_POST["cantidad"];
-    $precio = $_POST["precio"];
+    $precio = $_POST["valor"];
 
     $crearproducto_venta = "INSERT INTO cuentas(tipo,id_preparacion,id_diario,cantidad,valor) VALUES (0,'$producto','$id','$cantidad','$precio');";
     $resultado = mysqli_query($con, $crearproducto_venta);
@@ -42,7 +42,7 @@ if ($id == null) {
     }
 } else if ($receta != null) {
     $cantidad = $_POST["cantidad"];
-    $precio = $_POST["precio"];
+    $precio = $_POST["valor"];
 
     $crearreceta_venta = "INSERT INTO cuentas(tipo,id_preparacion,id_diario,cantidad,valor) VALUES (1,'$receta','$id','$cantidad','$precio');";
     $resultado = mysqli_query($con, $crearreceta_venta);

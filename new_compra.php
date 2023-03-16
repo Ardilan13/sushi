@@ -34,7 +34,7 @@ require_once 'includes/auth.php'; ?>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" value="<?php echo $row['precio']; ?>" id="precio" name="precio" min="0" required>
+                                <input type="number" value="<?php echo $row['precio']; ?>" id="valor" name="valor" min="0" required>
                             </div>
                             <button type="submit" id="btn_update_com">Actualizar</button>
                     <?php }
@@ -56,7 +56,7 @@ require_once 'includes/auth.php'; ?>
                     </div>
                     <div class="input">
                         <label for="precio">Precio:</label>
-                        <input type="number" id="precio" name="precio" min="0" required>
+                        <input type="number" id="valor" name="valor" min="0" required>
                     </div>
                     <button type="submit" id="add_compra">Crear</button>
                 <?php } ?>

@@ -22,7 +22,7 @@ $con = conectar(); ?>
                             <div class="input">
                                 <label for="producto">Producto:</label>
                                 <select type="text" id="receta" name="receta" min="0" required>
-                                    <?php $get_preparacion = "SELECT * from preparaciones WHERE tipo = 2;";
+                                    <?php $get_preparacion = "SELECT * from preparaciones WHERE tipo = 2 ORDER BY nombre ASC;";
                                     $resultado1 = mysqli_query($con, $get_preparacion);
                                     if ($resultado1->num_rows > 0) {
                                         while ($row1 = mysqli_fetch_assoc($resultado1)) { ?>
@@ -37,7 +37,7 @@ $con = conectar(); ?>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" id="precio" name="precio" min="0" required>
+                                <input type="number" id="valor" name="valor" min="0" required>
                             </div>
 
                             <button type="submit" id="agg_receta_venta">Guardar</button>

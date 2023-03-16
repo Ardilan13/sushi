@@ -19,6 +19,7 @@ $con = conectar(); ?>
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) { ?>
                             <input hidden type="text" id="id" name="id" value="<?php echo $id; ?>" required>
+                            <input hidden type="text" id="tipo" name="tipo" value="1" required>
                             <div class="input">
                                 <label for="producto">Producto:</label>
                                 <select type="text" id="producto" name="producto" min="0" required></select>
@@ -29,7 +30,7 @@ $con = conectar(); ?>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" id="precio" name="precio" min="0" required>
+                                <input type="number" id="valor" name="valor" min="0" required>
                             </div>
 
                             <button type="submit" id="agg_producto_venta">Guardar</button>

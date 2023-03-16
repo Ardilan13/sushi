@@ -26,6 +26,7 @@ $con = conectar(); ?>
                     $login = "SELECT * from productos ORDER BY id DESC;";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
+                        $suma = 0;
                         while ($row = mysqli_fetch_assoc($resultado)) {
                             (float)$merma = $row["merma"] / 100;
                             (float)$total = ($row["cantidad"] * $row["precio"]) + ($row["cantidad"] * $row["precio"]) * $merma;
@@ -75,7 +76,7 @@ $con = conectar(); ?>
             <form>
                 <div class="input">
                     <label for="inventario">Valor inventario:</label>
-                    <input type="number" value="<?php echo $suma ?>" disableds>
+                    <input disabled type="text" value="<?php echo number_format($suma, 2); ?>">
                 </div>
             </form>
 
