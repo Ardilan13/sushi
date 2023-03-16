@@ -154,7 +154,7 @@ $("#agg_producto").on("click", function (e) {
 
   $.ajax({
     url: "ajax/create_venta.php",
-    data: null,
+    data: { fecha: $("#fecha").val() },
     type: "POST",
     dataType: "text",
     success: function (text) {
@@ -181,7 +181,7 @@ $("#agg_receta").on("click", function (e) {
 
   $.ajax({
     url: "ajax/create_venta.php",
-    data: null,
+    data: { fecha: $("#fecha").val() },
     type: "POST",
     dataType: "text",
     success: function (text) {
@@ -612,6 +612,7 @@ $("#add_compra").on("click", function (e) {
 
   if (
     $("#producto").val().length > 0 &&
+    $("#fecha").val().length > 0 &&
     $("#cantidad").val().length > 0 &&
     $("#precio").val().length > 0
   ) {
@@ -776,6 +777,7 @@ $("#add_movimiento").on("click", function (e) {
   e.preventDefault();
   if (
     $("#producto").val().length > 0 &&
+    $("#fecha").val().length > 0 &&
     $("#cantidad").val().length > 0 &&
     $("#tipo").val().length > 0 &&
     $("#motivo").val().length > 0

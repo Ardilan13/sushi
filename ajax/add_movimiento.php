@@ -3,7 +3,8 @@ $con = conectar();
 
 $producto = $_POST["producto"];
 $tipo = $_POST["tipo"];
-$fecha = date('Y-m-d');
+$fecha = date_create($_POST["fecha"]);
+$fecha = date_format($fecha, "Y-m-d");
 $cantidad = $_POST["cantidad"];
 $motivo = $_POST["motivo"];
 

@@ -28,7 +28,8 @@ $con = conectar(); ?>
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {
                             (float)$merma = $row["merma"] / 100;
-                            (float)$total = ($row["cantidad"] * $row["precio"]) + ($row["cantidad"] * $row["precio"]) * $merma; ?>
+                            (float)$total = ($row["cantidad"] * $row["precio"]) + ($row["cantidad"] * $row["precio"]) * $merma;
+                            $suma = $suma + $total;  ?>
                             <!-- <td class="mid"> -->
                             <?php if ($row["unidad"] == 1) {
                                 $und = 'Kgs';
@@ -71,10 +72,16 @@ $con = conectar(); ?>
                 </tbody>
             </table>
             <button hidden id="clonar">clon</button>
+            <form>
+                <div class="input">
+                    <label for="inventario">Valor inventario:</label>
+                    <input type="number" value="<?php echo $suma ?>" disableds>
+                </div>
+            </form>
 
             <div class="botones">
                 <?php if ($_SESSION["id"] == 'admin') { ?>
-                    <button class="des_exc">Descargar Excel</button>
+                    <button class="edit des_exc">Descargar Excel</button>
                 <?php } ?>
                 <button id="new_pro">Nuevo Producto</button>
             </div>

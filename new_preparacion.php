@@ -154,10 +154,6 @@ $con = conectar(); ?>
                             <option value="3">Unidades</option>
                         </select>
                     </div>
-                    <div class="input">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
                     <button type="submit" id="add_preparacion">Crear</button>
                 <?php } ?>
             </form>

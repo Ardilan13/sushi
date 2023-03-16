@@ -4,9 +4,10 @@ $con = conectar();
 $id = isset($_POST["id"]) ? $_POST["id"] : null;
 $producto = isset($_POST["producto"]) ? $_POST["producto"] : null;
 $receta = isset($_POST["receta"]) ? $_POST["receta"] : null;
-$fecha = date("Y-m-d");
 
 if ($id == null) {
+    $fecha = date_create($_POST["fecha"]);
+    $fecha = date_format($fecha, "Y-m-d");
     $crear_venta = "INSERT INTO diario(fecha) VALUES ('$fecha');";
     $resultado = mysqli_query($con, $crear_venta);
     if ($resultado) {

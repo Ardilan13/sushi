@@ -16,7 +16,9 @@ $con = conectar(); ?>
                         <th>Tipo</th>
                         <th>Cantidad</th>
                         <th>Valor</th>
-                        <th>Edit</th>
+                        <?php if ($_SESSION["id"] == 'admin') { ?>
+                            <th>Edit</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,15 +50,18 @@ $con = conectar(); ?>
                                 </td>
                                 <td><?php echo number_format($row["cantidad"], 2) . $und; ?></td>
                                 <td><?php echo number_format($row["valor"], 2); ?></td>
-                                <td class="mid">
-                                    <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                                        </svg>
-                                    </button>
-                                </td>
+                                <?php if ($_SESSION["id"] == 'admin') { ?>
+                                    <td class="mid">
+                                        <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                <?php } ?>
+
                             </tr>
                     <?php }
                     } else {
@@ -67,7 +72,9 @@ $con = conectar(); ?>
             <button hidden id="clonar">clon</button>
 
             <div class="botones">
-                <button class="new_pre">Nueva Preparacion</button>
+                <?php if ($_SESSION["id"] == 'admin') { ?>
+                    <button class="new_pre">Nueva Preparacion</button>
+                <?php } ?>
             </div>
         </div>
     </div>

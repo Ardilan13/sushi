@@ -2,7 +2,8 @@
 $con = conectar();
 
 $producto = $_POST["producto"];
-$fecha = date('Y-m-d');
+$fecha = date_create($_POST["fecha"]);
+$fecha = date_format($fecha, "Y-m-d");
 $cantidad = $_POST["cantidad"];
 $precio = $_POST["precio"];
 $status = null;

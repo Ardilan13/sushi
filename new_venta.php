@@ -23,7 +23,7 @@ $con = conectar(); ?>
                             <input hidden type="text" id="id" name="id" value="<?php echo $id; ?>" required>
                             <div class="input">
                                 <label for="fecha">Fecha:</label>
-                                <input disabled type="text" id="fecha" value="<?php echo $row['fecha']; ?>" name="fecha" required>
+                                <input disabled type="text" id="fecha_null" value="<?php echo $row['fecha']; ?>" name="fecha_null" required>
                             </div>
                             <table id="tabla" class="display" style="width:80%">
                                 <thead>
@@ -99,20 +99,16 @@ $con = conectar(); ?>
 
                             <button type="submit" class="edit" value="<?php echo $id; ?>" id="agg_producto1">Agregar Producto</button>
                             <button type="submit" value="<?php echo $id; ?>" id="agg_receta1">Agregar Receta</button>
-                            <button type="submit" id="agg_venta">Guardar Venta</button>
+                            <button type="submit" id="agg_venta">Guardar</button>
                     <?php }
                     } ?>
                 <?php } else { ?>
                     <div class="input">
                         <label for="fecha">Fecha:</label>
-                        <input disabled type="text" id="fecha" value="<?php echo date("d-m-Y"); ?>" name="fecha" required>
+                        <input type="date" id="fecha" name="fecha" required>
                     </div>
                     <div class="input" style="margin-right: 0; justify-content:center;">
                         <label>No hay ningun producto o receta asignado.</label>
-                    </div>
-                    <div class="input">
-                        <label for="valor">Valor:</label>
-                        <input type="text" id="nombre" name="nombre" required>
                     </div>
                     <button type="submit" class="edit" id="agg_producto">Agregar Producto</button>
                     <button type="submit" id="agg_receta">Agregar Receta</button>

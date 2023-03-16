@@ -48,7 +48,7 @@ require_once 'includes/auth.php'; ?>
                     </div>
                     <div class="input">
                         <label for="fecha">Fecha:</label>
-                        <input type="text" disabled value="<?php echo date('d/m/Y'); ?>" id="fecha" name="fecha" required>
+                        <input type="date" id="fecha" name="fecha" required>
                     </div>
                     <div class="input">
                         <label for="cantidad" id="unidad_producto">Cantidad:</label>
