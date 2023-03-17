@@ -267,7 +267,10 @@ $("#agg_venta").on("click", function (e) {
     success: function (text) {
       if (text > 0) {
         alert("Venta guardada!");
-        $(location).prop("href", "ajax/descargar_excel.php");
+        $(location).prop(
+          "href",
+          "ajax/descargar_excel_venta.php?id=" + $(this).val()
+        );
       } else {
         alert("Error, intente nuevamente.");
         console.log(text);
@@ -285,7 +288,7 @@ $("#agg_receta_venta").on("click", function (e) {
   if (
     $("#receta").val().length > 0 &&
     $("#cantidad").val().length > 0 &&
-    $("#valor").val().length > 0
+    $("#valor_receta").val().length > 0
   ) {
     $.ajax({
       url: "ajax/create_venta.php",
@@ -567,7 +570,10 @@ $("#add_ing").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Ingrediente agregado y valor actualizado!");
-          $(location).prop("href", "preparaciones.php");
+          $(location).prop(
+            "href",
+            "new_preparacion.php?id=" + $("#id_preparacion").val()
+          );
         } else {
           alert("Error, intente nuevamente.");
           alert(text);
@@ -613,7 +619,10 @@ $("#add_pre").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Preparacion agregada!");
-          $(location).prop("href", "preparaciones.php");
+          $(location).prop(
+            "href",
+            "new_preparacion.php?id=" + $("#id_receta").val()
+          );
         } else {
           alert("Error, intente nuevamente.");
           alert(text);
@@ -757,6 +766,12 @@ $(".delete_com").on("click", function (e) {
       },
     });
   }
+});
+
+$("#receta").change(function () {
+  //poner que tipo de unidad es el producto
+  var valor = $("#receta option:selected").attr("valor");
+  $("#valor_receta").attr("placeholder", valor);
 });
 
 //Actualizar la cantidad para tener en cuenta las unidades, modulo agreagr compras

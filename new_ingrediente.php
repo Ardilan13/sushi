@@ -12,18 +12,18 @@ require_once 'includes/auth.php'; ?>
         <div class="info">
             <form id="new_ingrediente">
                 <?php if (isset($_GET["id"])) { ?>
-                    <input hidden type="text" value="<?php echo $_GET["id"]; ?>" name="id">
+                    <input hidden type="text" value="<?php echo $_GET["id"]; ?>" name="id" id="id_preparacion">
                     <div class="input">
                         <label for="producto">Producto:</label>
                         <select name="producto" id="producto" required></select>
                     </div>
                     <div class="input">
                         <label for="cantidad" id="unidad_producto">Cantidad:</label>
-                        <input type="number" id="cantidad" name="cantidad" min="0" required>
+                        <input type="number" id="cantidad" name="cantidad" min="0" step="0.01" required>
                     </div>
                     <div class="input">
-                        <label for="valor">Valor:</label>
-                        <input type="number" id="valor" name="valor" min="0" required>
+                        <label for="valor">Precio:</label>
+                        <input type="number" id="valor" name="valor" step="0.01" min="0" required>
                     </div>
                     <button id="add_ing">Nuevo Ingrediente</button>
                     <?php } else if (isset($_GET['ingrediente'])) {
@@ -47,8 +47,8 @@ require_once 'includes/auth.php'; ?>
                                 <input type="number" precio="<?php echo $row['precio']; ?>" value="<?php echo $row['cantidad']; ?>" id="cantidad" name="cantidad" min="0" required>
                             </div>
                             <div class="input">
-                                <label for="valor">Valor:</label>
-                                <input disabled type="number" id="valor" value="<?php echo $row['valor']; ?>" min="0">
+                                <label for="valor">Precio:</label>
+                                <input type="number" id="valor" name="valor" value="<?php echo $row['valor']; ?>" min="0">
                             </div>
                             <button id="update_ing">Actualizar Ingrediente</button>
                     <?php }

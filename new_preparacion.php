@@ -1,6 +1,7 @@
 <?php require_once 'includes/header.php';
 require_once 'includes/auth.php';
 require_once 'conexion.php';
+$total = 0;
 $con = conectar(); ?>
 <main>
     <div class="container">
@@ -48,6 +49,7 @@ $con = conectar(); ?>
                                         <?php } else { ?>
                                             <th>Producto</th>
                                         <?php } ?>
+                                        <th>Precio</th>
                                         <th>Cantidad</th>
                                         <th>Valor</th>
                                         <th>Edit</th>
@@ -59,6 +61,7 @@ $con = conectar(); ?>
                                     $resultado = mysqli_query($con, $get_preparacion);
                                     if ($resultado->num_rows > 0) {
                                         while ($row1 = mysqli_fetch_assoc($resultado)) {
+                                            $valor = $row1['valor'] * $row1["cantidad"];
                                             if ($row1["unidad"] == 1) {
                                                 $und = 'Kgs';
                                             } else if ($row1["unidad"] == 2) {
@@ -81,8 +84,9 @@ $con = conectar(); ?>
                                                 <?php if ($row["tipo"] == 2) { ?>
                                                     <td><?php echo $tipo; ?></td>
                                                 <?php } ?>
-                                                <td class="mid"><?php echo $row1['cantidad'] . " " . $und ?></td>
                                                 <td id="valor_ing"><?php echo $row1['valor']; ?></td>
+                                                <td class="mid"><?php echo $row1['cantidad'] . " " . $und ?></td>
+                                                <td id="valor_ing"><?php echo number_format($valor, 2); ?></td>
                                                 <td class="mid">
                                                     <?php if ($row1["tipo"] == 0) { ?>
                                                         <button class="edit edit_pre_pro" id="<?php echo $row1["id"]; ?>">

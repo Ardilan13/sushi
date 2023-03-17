@@ -14,7 +14,7 @@ if ($producto != null) {
         $get_preparacion = "SELECT valor FROM preparaciones WHERE id = $id LIMIT 1;";
         $resultado_get = mysqli_query($con, $get_preparacion);
         $row = mysqli_fetch_array($resultado_get);
-        $total = (float)$row['valor'] + (float)$valor;
+        $total = (float)$row['valor'] + ((float)$valor * $cantidad);
         $update_preparacion = "UPDATE preparaciones SET valor=$total WHERE id = $id;";
         $resultado_update = mysqli_query($con, $update_preparacion);
         if ($resultado_update) {
@@ -30,7 +30,7 @@ if ($producto != null) {
         $get_preparacion = "SELECT valor FROM preparaciones WHERE id = $id LIMIT 1;";
         $resultado_get = mysqli_query($con, $get_preparacion);
         $row = mysqli_fetch_array($resultado_get);
-        $total = (float)$row['valor'] + (float)$valor;
+        $total = (float)$row['valor'] + ((float)$valor * $cantidad);
         $update_preparacion = "UPDATE preparaciones SET valor=$total WHERE id = $id;";
         $resultado_update = mysqli_query($con, $update_preparacion);
         if ($resultado_update) {

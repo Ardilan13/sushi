@@ -80,7 +80,7 @@ $con = conectar(); ?>
                             <?php if ($row['status'] != 1) { ?>
                                 <button type="submit" class="edit" value="<?php echo $id; ?>" id="agg_producto1">Agregar Producto</button>
                                 <button type="submit" value="<?php echo $id; ?>" id="agg_receta1">Agregar Receta</button>
-                                <button type="submit" id="agg_venta">Guardar</button>
+                                <button type="submit" value="<?php echo $id; ?>" id="agg_venta">Guardar</button>
                             <?php } ?>
 
                     <?php }

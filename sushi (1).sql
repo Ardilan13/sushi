@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2023 a las 06:50:05
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 7.4.30
+-- Tiempo de generación: 18-03-2023 a las 00:27:58
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -74,9 +74,29 @@ CREATE TABLE `ingredientes` (
   `tipo` int(1) NOT NULL,
   `id_preparacion` int(100) NOT NULL,
   `id_producto` int(100) NOT NULL,
-  `cantidad` int(100) NOT NULL,
-  `valor` float NOT NULL
+  `cantidad` float(10,2) NOT NULL,
+  `valor` float(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ingredientes`
+--
+
+INSERT INTO `ingredientes` (`id`, `tipo`, `id_preparacion`, `id_producto`, `cantidad`, `valor`) VALUES
+(1, 0, 1, 1, 1.00, 1.00),
+(2, 0, 1, 1, 2.00, 3.00),
+(3, 1, 1, 2, 2.00, 3.00),
+(4, 0, 2, 1, 100.00, 2.00),
+(5, 0, 2, 1, 11.00, 10.50),
+(6, 0, 2, 1, 10.00, 1000.00),
+(7, 0, 2, 1, 11.45, 1000.00),
+(8, 0, 2, 1, 10.00, 100.00),
+(9, 0, 2, 1, 100.00, 100.00),
+(10, 0, 1, 1, 100.00, 100.00),
+(11, 0, 3, 1, 10.00, 100.00),
+(12, 0, 3, 1, 50.00, 20.00),
+(13, 0, 4, 1, 100.00, 10.00),
+(14, 1, 4, 3, 10.00, 100.00);
 
 -- --------------------------------------------------------
 
@@ -108,6 +128,16 @@ CREATE TABLE `preparaciones` (
   `valor` float(50,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `preparaciones`
+--
+
+INSERT INTO `preparaciones` (`id`, `nombre`, `tipo`, `unidad`, `cantidad`, `valor`) VALUES
+(1, 'dilan', 2, 1, NULL, 10013.00),
+(2, 'redes de computadores', 1, 1, NULL, 32512.50),
+(3, 'pureba_costo', 1, 3, NULL, 2000.00),
+(4, 'prueba_receta', 2, 3, NULL, 2000.00);
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +156,13 @@ CREATE TABLE `productos` (
   `precio` double(50,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `status`, `tipo`, `proveedor`, `unidad`, `merma`, `cantidad`, `precio`) VALUES
+(1, 'redes de computadores', NULL, 1, 'a', 1, 0, 1.00, 1.00);
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +173,13 @@ CREATE TABLE `tipo` (
   `id` int(10) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo`
+--
+
+INSERT INTO `tipo` (`id`, `nombre`) VALUES
+(1, 'hola');
 
 --
 -- Índices para tablas volcadas
@@ -219,7 +263,7 @@ ALTER TABLE `diario`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
@@ -231,19 +275,19 @@ ALTER TABLE `movimientos`
 -- AUTO_INCREMENT de la tabla `preparaciones`
 --
 ALTER TABLE `preparaciones`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

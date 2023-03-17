@@ -13,7 +13,7 @@ $con = conectar(); ?>
         <div class="info">
             <form id="new_preparacion_receta">
                 <?php if (isset($_GET["id"])) { ?>
-                    <input hidden type="text" value="<?php echo $_GET["id"]; ?>" name="id">
+                    <input hidden type="text" value="<?php echo $_GET["id"]; ?>" name="id" id="id_receta">
                     <div class="input">
                         <label for="preparacion">Preparacion:</label>
                         <select name="preparacion" id="preparacion" required>
@@ -32,7 +32,7 @@ $con = conectar(); ?>
                         <input type="number" id="cantidad_pre" name="cantidad" min="0" required>
                     </div>
                     <div class="input">
-                        <label for="valor_pre">Valor:</label>
+                        <label for="valor_pre">Precio:</label>
                         <input type="number" id="valor_pre" name="valor" min="0" required>
                     </div>
                     <button id="add_pre">Agregar</button>

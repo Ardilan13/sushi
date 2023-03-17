@@ -16,7 +16,7 @@ if ($id == null) {
         $row = mysqli_fetch_array($resultado_get);
         echo $row['id'];
     } else {
-        echo 0;
+        echo $crear_venta;
     }
 } else if ($producto != null) {
     $cantidad = $_POST["cantidad"];
