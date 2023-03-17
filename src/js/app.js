@@ -265,7 +265,7 @@ $("#agg_venta").on("click", function (e) {
     type: "POST",
     dataType: "text",
     success: function (text) {
-      if (text > 110) {
+      if (text > 0) {
         alert("Venta guardada!");
         $(location).prop("href", "ajax/descargar_excel.php");
       } else {
@@ -367,9 +367,12 @@ $("#add_producto_pro").on("click", function (e) {
     $("#nombre").val().length > 0 &&
     $("#tipo").val().length > 0 &&
     $("#unidad").val().length > 0 &&
-    $("#cantidad").val().length > 0
+    $("#valor_new").val().length > 0 &&
+    $("#cantidad_new").val().length > 0
   ) {
-    if ($("#cantidad_pro_1").val() <= $("#test").val()) {
+    producto = parseFloat($("#cantidad_pro_1").val());
+    cantidad = parseFloat($("#test").val());
+    if (producto <= cantidad) {
       $.ajax({
         url: "ajax/add_produccion.php",
         data: $("#new_producto_pro").serialize(),
@@ -389,7 +392,7 @@ $("#add_producto_pro").on("click", function (e) {
         },
       });
     } else {
-      alert("La cantidad a usar no pued ser mayor a la cantidad existente.");
+      alert("La cantidad a usar no puede ser mayor a la cantidad existente.");
     }
   } else {
     alert("Llena todos los campos.");
@@ -401,9 +404,12 @@ $("#update_produccion").on("click", function (e) {
 
   if (
     $("#producto").val().length > 0 &&
-    $("#cantidad_pro_2").val().length > 0
+    $("#cantidad_pro_2").val().length > 0 &&
+    $("#valor_old").val().length > 0
   ) {
-    if ($("#cantidad_pro_2").val() <= $("#test1").val()) {
+    producto = parseFloat($("#cantidad_pro_2").val());
+    cantidad = parseFloat($("#test1").val());
+    if (producto <= cantidad) {
       $.ajax({
         url: "ajax/update_produccion.php",
         data: $("#update_producto_pro").serialize(),
@@ -423,7 +429,7 @@ $("#update_produccion").on("click", function (e) {
         },
       });
     } else {
-      alert("La cantidad a usar no pued ser mayor a la cantidad existente.");
+      alert("La cantidad a usar no puede ser mayor a la cantidad existente.");
     }
   } else {
     alert("Llena todos los campos.");
@@ -726,6 +732,33 @@ $("#btn_update_com").on("click", function (e) {
   }
 });
 
+$(".delete_com").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+
+  if (confirm("Desea borrar la compra con id:" + id + "?")) {
+    $.ajax({
+      url: "ajax/delete_compra.php",
+      data: "id=" + id,
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Compra eliminada y cantidad modificada!");
+          $(location).prop("href", "compras.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
 //Actualizar la cantidad para tener en cuenta las unidades, modulo agreagr compras
 $("#producto").change(function () {
   //poner que tipo de unidad es el producto
@@ -808,12 +841,11 @@ $("#preparacion").change(function () {
 });
 
 //Actualizar el valor de manera automatica al cambiar la cantidad
-$("#cantidad").change(function () {
+/* $("#cantidad").change(function () {
   var cantidad = parseFloat($(this).val());
   var precio = parseFloat($(this).attr("precio"));
-  var valor = cantidad * precio;
-  $("#valor").val(valor);
-});
+  $("#valor").attr("placeholder", precio);
+}); */
 
 //acceder al menudo de generar movimientos, entradas o salidas
 $(".new_mov").on("click", function (e) {

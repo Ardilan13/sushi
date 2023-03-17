@@ -10,6 +10,10 @@
   .delete {
     background-color: v.$rosa !important;
   }
+
+  .delete:hover {
+    background-color: darken(v.$rosa, 10) !important;
+  }
 }
 
 #new_ing {

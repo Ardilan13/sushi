@@ -55,7 +55,7 @@ $con = conectar(); ?>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $get_preparacion = "SELECT (SELECT nombre FROM productos WHERE id = id_producto) as producto,cantidad, valor, id,tipo, (SELECT unidad FROM productos WHERE id = id_producto) as unidad from ingredientes WHERE id_preparacion = $id;";
+                                    $get_preparacion = "SELECT (SELECT nombre FROM productos WHERE id = id_producto) as producto,(SELECT nombre FROM preparaciones WHERE id = id_producto) as preparacion,cantidad, valor, id,id_producto,tipo, (SELECT unidad FROM productos WHERE id = id_producto) as unidad from ingredientes WHERE id_preparacion = $id;";
                                     $resultado = mysqli_query($con, $get_preparacion);
                                     if ($resultado->num_rows > 0) {
                                         while ($row1 = mysqli_fetch_assoc($resultado)) {
@@ -71,11 +71,13 @@ $con = conectar(); ?>
 
                                             if ($row1["tipo"] == 0) {
                                                 $tipo = 'Producto';
+                                                $nombre = $row1["producto"];
                                             } else {
                                                 $tipo = 'Preparacion';
+                                                $nombre = $row1["preparacion"];
                                             } ?>
                                             <tr>
-                                                <td><?php echo $row1['producto']; ?></td>
+                                                <td><?php echo $nombre; ?></td>
                                                 <?php if ($row["tipo"] == 2) { ?>
                                                     <td><?php echo $tipo; ?></td>
                                                 <?php } ?>
@@ -91,7 +93,7 @@ $con = conectar(); ?>
                                                             </svg>
                                                         </button>
                                                     <?php } else { ?>
-                                                        <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">
+                                                        <button class="edit edit_pre" id="<?php echo $row1["id_producto"]; ?>">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                                 <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />

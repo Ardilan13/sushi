@@ -3,7 +3,7 @@ ini_set('date.timezone', 'America/Bogota');
 function conectar()
 {
     $usuario = "root";
-    $contra = "HaikoSushi";
+    $contra = "";
     $ip = "localhost";
     $bd = "sushi";
     $port = "3306";

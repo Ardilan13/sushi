@@ -10,9 +10,10 @@ header('Content-Disposition: attachment; filename=inventario_' . date("d-M-Y") .
         <td>Nombre</td>
         <td>Merma</td>
         <td>Precio de Compra</td>
+        <td>Precio Real</td>
         <td>Cantidad</td>
         <td>Cantidad Real</td>
-        <td>Precio Real</td>
+        <td>Precio Total</td>
     </tr>
     <?php
     $login = "SELECT * from productos ORDER BY nombre ASC;";
@@ -24,6 +25,7 @@ header('Content-Disposition: attachment; filename=inventario_' . date("d-M-Y") .
             <td><?php echo $row["nombre"]; ?></td>
             <td><?php echo $row["merma"] . '%'; ?></td>
             <td><?php echo $row["precio"]; ?></td>
+            <td><?php echo ($row["precio"] + $row['precio'] * $merma); ?></td>
             <td><?php echo $row["cantidad"]; ?></td>
             <td></td>
             <td><?php echo number_format($total, 2); ?></td>

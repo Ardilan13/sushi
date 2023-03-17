@@ -18,7 +18,7 @@ $con = conectar(); ?>
                         <label for="preparacion">Preparacion:</label>
                         <select name="preparacion" id="preparacion" required>
                             <option></option>
-                            <?php $get_preparacion = "SELECT nombre,id,unidad FROM preparaciones";
+                            <?php $get_preparacion = "SELECT nombre,id,unidad FROM preparaciones WHERE tipo = 1";
                             $resultado = mysqli_query($con, $get_preparacion);
                             if ($resultado->num_rows > 0) {
                                 while ($row = mysqli_fetch_assoc($resultado)) { ?>

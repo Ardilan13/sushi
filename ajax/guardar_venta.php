@@ -21,10 +21,11 @@ if ($resultado) {
                         if ($resultado2) {
                             while ($row2 = mysqli_fetch_assoc($resultado2)) {
                                 $producto = $row2['id_producto'];
+                                $cantidad_producto = $row2['cantidad'];
                                 $get_producto = "SELECT cantidad FROM productos WHERE id = $producto LIMIT 1;";
                                 $resultado_get = mysqli_query($con, $get_producto);
                                 $row3 = mysqli_fetch_array($resultado_get);
-                                $total = (float)$row3['cantidad'] - (float)$cantidad;
+                                $total = (float)$row3['cantidad'] - ((float)$cantidad * (float)$cantidad_producto);
                                 $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
                                 $resultado_update = mysqli_query($con, $update_producto);
                                 if ($resultado_update) {
@@ -36,10 +37,11 @@ if ($resultado) {
                         }
                     } else {
                         $producto = $row1['id_producto'];
+                        $cantidad_producto = $row1['cantidad'];
                         $get_producto = "SELECT cantidad FROM productos WHERE id = $producto LIMIT 1;";
                         $resultado_get = mysqli_query($con, $get_producto);
-                        $row1 = mysqli_fetch_array($resultado_get);
-                        $total = (float)$row1['cantidad'] - (float)$cantidad;
+                        $row2 = mysqli_fetch_array($resultado_get);
+                        $total = (float)$row2['cantidad'] - ((float)$cantidad * $cantidad_producto);
                         $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
                         $resultado_update = mysqli_query($con, $update_producto);
                         if ($resultado_update) {

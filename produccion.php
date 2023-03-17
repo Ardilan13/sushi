@@ -38,7 +38,7 @@ $id = $_GET['id'] ?? null; ?>
                     <div class="existente">
                         <form id="update_producto_pro">
                             <input type="text" hidden value="<?php echo $id; ?>" name="id">
-                            <input type="text" hidden value="<?php echo $row['cantidad']; ?>" id="test1" name="total1">
+                            <input type="number" hidden value="<?php echo $row['cantidad']; ?>" id="test1" name="total1">
                             <div class="input">
                                 <label for="cantidad_pro_2" id="unidad_producto">Cantidad a usar:</label>
                                 <input type="number" id="cantidad_pro_2" name="cantidad_pro_2" min="0" required>
@@ -51,7 +51,11 @@ $id = $_GET['id'] ?? null; ?>
                             </div>
                             <div class="input">
                                 <label for="cantidad_new" id="unidad_producto">Cantidad:</label>
-                                <input type="number" id="cantidad_new" name="cantidad_new" min="0" required>
+                                <input type="number" id="cantidad" name="cantidad_new" min="0" required>
+                            </div>
+                            <div class="input">
+                                <label for="valor" id="unidad_producto">Precio:</label>
+                                <input type="number" id="valor_old" name="valor" min="0" required placeholder="<?php echo $row['precio']; ?>">
                             </div>
                             <button type="submit" id="update_produccion">Actualizar producto</button>
                         </form>
@@ -59,12 +63,12 @@ $id = $_GET['id'] ?? null; ?>
 
                     <div class="nuevo">
                         <form id="new_producto_pro">
-                            <input type="text" hidden value="<?php echo $row['cantidad']; ?>" id="test" name="total">
+                            <input type="number" hidden value="<?php echo $row['cantidad']; ?>" id="test" name="total">
                             <input type="text" hidden value="<?php echo $id; ?>" name="id">
 
                             <div class="input">
                                 <label for="nombre">Cantidad a usar:</label>
-                                <input type="number" name="cantidad_pro_1" id="cantidad_pro_1" min="0" required>
+                                <input type="number" step="0.01" name="cantidad_pro_1" id="cantidad_pro_1" min="0" required>
                             </div>
                             <div class="input">
                                 <label for="nombre">Nombre:</label>
@@ -94,7 +98,11 @@ $id = $_GET['id'] ?? null; ?>
                             </div>
                             <div class="input">
                                 <label for="cantidad">Cantidad:</label>
-                                <input type="number" id="cantidad" name="cantidad" min="0" required>
+                                <input type="number" id="cantidad_new" name="cantidad" min="0" required>
+                            </div>
+                            <div class="input">
+                                <label for="valor_new" id="unidad_producto">Precio:</label>
+                                <input type="number" id="valor_new" name="valor" min="0" required placeholder="<?php echo $row['precio']; ?>">
                             </div>
                             <button type="submit" id="add_producto_pro">Crear Producto</button>
                         </form>

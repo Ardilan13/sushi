@@ -8,8 +8,9 @@ $nombre = $_POST["nombre"];
 $tipo = $_POST["tipo"];
 $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
+$valor = $_POST["valor"];
 
-$crear_prod = "INSERT INTO productos(nombre, tipo, unidad, cantidad) VALUES ('$nombre',$tipo,$unidad,$cantidad);";
+$crear_prod = "INSERT INTO productos(nombre, tipo, unidad, cantidad, precio) VALUES ('$nombre',$tipo,$unidad,$cantidad,$valor);";
 $resultado = mysqli_query($con, $crear_prod);
 if ($resultado) {
     (float)$total1 = (float)$total - (float)$cantidad_pro1;
