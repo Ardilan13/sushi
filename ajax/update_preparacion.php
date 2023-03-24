@@ -5,11 +5,57 @@ $id = $_POST["id"];
 $nombre = $_POST["nombre"];
 $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
+$tipo = $_POST["tipo"];
+$valor = $_POST["valor"] ?? null;
 
-$actualizar_pre = "UPDATE `preparaciones` SET `nombre`='$nombre',`unidad`='$unidad',`cantidad`='$cantidad' WHERE id = $id";
+$actualizar_pre = "UPDATE `preparaciones` SET `nombre`='$nombre',`unidad`='$unidad' WHERE id = $id";
 $resultado = mysqli_query($con, $actualizar_pre);
 if ($resultado) {
-    echo 1;
+    if ($tipo == 1 && $cantidad != 0) {
+        $getproducto = "SELECT i.cantidad as preparacion,p.cantidad,p.id FROM ingredientes i INNER JOIN productos p ON i.id_producto = p.id WHERE id_preparacion = $id;";
+        $resultado2 = mysqli_query($con, $getproducto);
+        if ($resultado2->num_rows > 0) {
+            while ($row1 = mysqli_fetch_assoc($resultado2)) {
+                $id_producto = $row1['id'];
+                $cantidad_producto = $row1['cantidad'];
+                $cantidad_preparacion = $row1['preparacion'];
+                $total = $cantidad_producto - ($cantidad_preparacion * $cantidad);
+                $update_producto = "UPDATE `productos` SET cantidad=$total WHERE id = $id_producto";
+                $resultado3 = mysqli_query($con, $update_producto);
+                if ($resultado3) {
+                    echo 1;
+                }
+            }
+        } else {
+            echo 0;
+        }
+        $nombre_producto = "SELECT id,cantidad FROM productos WHERE nombre = '$nombre';";
+        $resultado4 = mysqli_query($con, $nombre_producto);
+        if ($resultado4->num_rows > 0) {
+            while ($row2 = mysqli_fetch_assoc($resultado4)) {
+                $id_pro = $row2['id'];
+                $cantidad_pro = $row2['cantidad'];
+                $total = $cantidad_pro + $cantidad;
+                $crear_prod = "UPDATE `productos` SET cantidad=$total WHERE id = $id_pro";
+                $resultado1 = mysqli_query($con, $crear_prod);
+                if ($resultado1) {
+                    echo 1;
+                } else {
+                    echo 0;
+                }
+            }
+        } else {
+            $crear_prod = "INSERT INTO productos(nombre,tipo, unidad, cantidad, precio) VALUES ('$nombre',0,$unidad,$cantidad,$valor);";
+            $resultado1 = mysqli_query($con, $crear_prod);
+            if ($resultado1) {
+                echo 1;
+            } else {
+                echo 0;
+            }
+        }
+    } else {
+        echo 1;
+    }
 } else {
     echo 0;
 }

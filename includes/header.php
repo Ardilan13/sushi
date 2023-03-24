@@ -28,6 +28,7 @@
                     <a href="compras.php">Compras</a>
                     <a href="movimientos.php">Movimientos</a>
                     <a href="preparaciones.php">Preparaciones</a>
+                    <a href="recetas.php">Recetas</a>
                     <a href="ventas.php">Ventas</a>
                 </div>
                 <a id="cerrar_sesion" href="ajax/logout.php">Cerrar Sesion</a>

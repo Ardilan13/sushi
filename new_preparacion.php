@@ -16,9 +16,11 @@ $con = conectar(); ?>
                 <?php } else { ?>
                     <p>Editar Preparacion</p>
                 <?php } ?>
+            <?php } else if (isset($_GET["receta"])) { ?>
+                <p>Nueva Receta</p>
             <?php } else { ?>
                 <p>Nueva Preparacion</p>
-            <?php } ?>
+            <?php  } ?>
         </div>
         <div class="info">
             <form id="new_preparacion">
@@ -28,6 +30,7 @@ $con = conectar(); ?>
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) { ?>
                             <input hidden type="text" id="id" name="id" value="<?php echo $id; ?>" required>
+                            <input hidden type="text" id="tipo" name="tipo" value="<?php echo $row['tipo']; ?>" required>
                             <div class="input">
                                 <label for="nombre">Nombre:</label>
                                 <input value="<?php echo $row['nombre']; ?>" type="text" id="nombre" name="nombre" required>
@@ -113,10 +116,14 @@ $con = conectar(); ?>
                                 </tbody>
                             </table>
                             <button hidden id="clonar">clon</button>
-                            <div class="input">
-                                <label for="cantidad">Cantidad:</label>
-                                <input value="<?php echo $row['cantidad']; ?>" type="text" min="0" id="cantidad" name="cantidad" required>
-                            </div>
+                            <?php if ($row["tipo"] == 1) { ?>
+                                <div class="input">
+                                    <label for="cantidad">Cantidad:</label>
+                                    <input value="<?php echo $row['cantidad']; ?>" type="text" min="0" id="cantidad" name="cantidad" required>
+                                </div>
+                            <?php } else { ?>
+                                <input hidden value="0" type="text" min="0" id="cantidad" name="cantidad" required>
+                            <?php } ?>
                             <div class="input">
                                 <label for="unidad">Unidad:</label>
                                 <select name="unidad" id="unidad" required>
@@ -130,12 +137,17 @@ $con = conectar(); ?>
                                 <label for="valor">Costo:</label>
                                 <input disabled value="<?php echo $row['valor']; ?>" type="text" id="nombre" name="nombre" required>
                             </div>
+                            <input hidden value="<?php echo $row['valor']; ?>" type="text" id="valor" name="valor" required>
 
                             <button id="new_ing">Nuevo Ingrediente</button>
-                            <?php if ($row["tipo"] == 2) { ?>
+                            <!-- <?php if ($row["tipo"] == 2) { ?>
                                 <button id="<?php echo $row['id'] ?>" class="add_pre_rec">Agregar Preparacion</button>
+                            <?php } ?> -->
+                            <?php if ($row["tipo"] == 1) { ?>
+                                <button id="save_pre">Generar</button>
+                            <?php } else { ?>
+                                <button id="save_pre">Guardar</button>
                             <?php } ?>
-                            <button id="save_pre">Guardar</button>
                     <?php }
                     } ?>
                 <?php } else { ?>
@@ -143,14 +155,15 @@ $con = conectar(); ?>
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
-                    <div class="input">
+                    <!-- <div class="input">
                         <label for="tipo">Tipo:</label>
                         <select name="tipo" id="tipo" required>
                             <option></option>
                             <option value="1">Preparacion</option>
                             <option value="2">Receta</option>
                         </select>
-                    </div>
+                    </div> -->
+                    <input hidden type="text" id="tipo" name="tipo" value="<?php echo isset($_GET["receta"]) ? '2' : '1'; ?>" required>
                     <div class="input">
                         <label for="unidad">Unidad:</label>
                         <select name="unidad" id="unidad" required>

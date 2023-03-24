@@ -64,6 +64,7 @@ $con = conectar(); ?>
                                 <label for="precio">Precio:</label>
                                 <input type="number" id="precio" disabled name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
                             </div>
+                            <button type="submit" id="btn_historial">Historial</button>
                             <button type="submit" class="edit" id="btn_producir">Producir</button>
                             <button type="submit" id="btn_update_pro">Actualizar</button>
                     <?php }

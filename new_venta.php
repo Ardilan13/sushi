@@ -30,6 +30,7 @@ $con = conectar(); ?>
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Tipo</th>
+                                        <th>Precio</th>
                                         <th>Cantidad</th>
                                         <th>Valor</th>
                                     </tr>
@@ -62,8 +63,9 @@ $con = conectar(); ?>
                                                     <tr>
                                                         <td><?php echo $row2['nombre']; ?></td>
                                                         <td><?php echo $tipo; ?></td>
+                                                        <td><?php echo number_format($row2['valor'], 2); ?></td>
                                                         <td class="mid"><?php echo number_format($row2['cantidad'], 2) . " " . $und ?></td>
-                                                        <td id="valor_ing"><?php echo number_format($row2['valor'], 2); ?></td>
+                                                        <td><?php echo number_format($row2['valor'] * $row2['cantidad'], 2); ?></td>
                                                     </tr>
                                             <?php }
                                             } ?>

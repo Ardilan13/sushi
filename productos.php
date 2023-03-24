@@ -24,10 +24,10 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
+                    $suma = 0;
                     $login = "SELECT * from productos ORDER BY id DESC;";
                     $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
-                        $suma = 0;
                         while ($row = mysqli_fetch_assoc($resultado)) {
                             (float)$merma = $row["merma"] / 100;
                             (float)$total = ($row["cantidad"] * $row["precio"]) + ($row["cantidad"] * $row["precio"]) * $merma;

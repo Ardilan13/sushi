@@ -16,7 +16,7 @@ if ($id == null) {
         $row = mysqli_fetch_array($resultado_get);
         echo $row['id'];
     } else {
-        echo $crear_venta;
+        echo 0;
     }
 } else if ($producto != null) {
     $cantidad = $_POST["cantidad"];
@@ -29,13 +29,13 @@ if ($id == null) {
         $resultado_get = mysqli_query($con, $get_venta);
         $row = mysqli_fetch_array($resultado_get);
         $valor = $row['valor'];
-        $total = $valor + $precio;
+        $total = $valor + ($precio * $cantidad);
         $update_producto = "UPDATE diario SET valor=$total WHERE id = $id;";
         $resultado_update = mysqli_query($con, $update_producto);
         if ($resultado_update) {
             echo 1;
         } else {
-            echo $update_producto;
+            echo 0;
         }
     } else {
         echo 0;
@@ -57,7 +57,7 @@ if ($id == null) {
         if ($resultado_update) {
             echo 1;
         } else {
-            echo $update_receta;
+            echo 0;
         }
     } else {
         echo 0;

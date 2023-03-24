@@ -5,7 +5,7 @@ $con = conectar(); ?>
 <main>
     <div class="container">
         <div class="header">
-            <p>Preparaciones</p>
+            <p>Recetas</p>
         </div>
         <div class="info">
             <table id="tabla" class="display" style="width:100%">
@@ -13,6 +13,7 @@ $con = conectar(); ?>
                     <tr>
                         <th class="mid">Codigo</th>
                         <th>Nombre</th>
+                        <!--<th>Cantidad</th>-->
                         <th>Valor</th>
                         <?php if ($_SESSION["id"] == 'admin') { ?>
                             <th>Edit</th>
@@ -21,8 +22,10 @@ $con = conectar(); ?>
                 </thead>
                 <tbody>
                     <?php
-                    $preparaciones = "SELECT * FROM preparaciones WHERE tipo = 1 ORDER BY id DESC";
-                    $resultado = mysqli_query($con, $preparaciones);
+                    /* $login = "SELECT p.nombre as producto,p.unidad,m.tipo,m.fecha, m.cantidad, m.motivo FROM movimientos m join productos p on m.id_producto = p.id;";*/
+                    /*                     $login = "SELECT DISTINCT p.id,p.nombre,p.valor,p.tipo,(SELECT COUNT(DISTINCT id_producto) FROM ingredientes where p.id = id_preparacion) as productos FROM preparaciones p JOIN ingredientes i ON p.id = i.id_preparacion ORDER BY p.id DESC;";  */
+                    $login = "SELECT * FROM preparaciones WHERE tipo = 2 ORDER BY id DESC";
+                    $resultado = mysqli_query($con, $login);
                     if ($resultado->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($resultado)) {
                             if ($row["unidad"] == 1) {
@@ -37,6 +40,7 @@ $con = conectar(); ?>
                             <tr>
                                 <td><?php echo $row["id"]; ?></td>
                                 <td><?php echo $row["nombre"]; ?></td>
+                                <!-- <td><?php echo number_format($row["cantidad"], 2) . $und; ?></td> -->
                                 <td><?php echo number_format($row["valor"], 2); ?></td>
                                 <?php if ($_SESSION["id"] == 'admin') { ?>
                                     <td class="mid">
@@ -53,7 +57,7 @@ $con = conectar(); ?>
                             </tr>
                     <?php }
                     } else {
-                        echo "<td valign='top' colspan='8' class='dataTables_empty'>No hay preparaciones para mostrar</td>";
+                        echo "<td valign='top' colspan='8' class='dataTables_empty'>No hay productos para mostrar</td>";
                     } ?>
                 </tbody>
             </table>
@@ -61,7 +65,7 @@ $con = conectar(); ?>
 
             <div class="botones">
                 <?php if ($_SESSION["id"] == 'admin') { ?>
-                    <button class="new_pre">Nueva Preparacion</button>
+                    <button class="new_rec">Nueva Receta</button>
                 <?php } ?>
             </div>
         </div>

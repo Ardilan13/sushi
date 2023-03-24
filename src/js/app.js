@@ -347,6 +347,12 @@ $("#btn_update_pro").on("click", function (e) {
   }
 });
 
+$("#btn_historial").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "historial.php?id=" + $("#id").val());
+});
+
 $("#btn_producir").on("click", function (e) {
   e.preventDefault();
 
@@ -445,6 +451,12 @@ $(".new_pre").on("click", function (e) {
   $(location).prop("href", "new_preparacion.php");
 });
 
+$(".new_rec").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "new_preparacion.php?receta=1");
+});
+
 $(".des_exc").on("click", function (e) {
   e.preventDefault();
 
@@ -467,8 +479,8 @@ $("#add_preparacion").on("click", function (e) {
       dataType: "text",
       success: function (text) {
         if (text == 1) {
-          alert("Preparacion Creada!");
-          $(location).prop("href", "preparaciones.php");
+          alert("Creado correctamente!");
+          window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
           alert(text);
@@ -537,9 +549,9 @@ $("#save_pre").on("click", function (e) {
       type: "POST",
       dataType: "text",
       success: function (text) {
-        if (text == 1) {
-          alert("Preparacion actualizada!");
-          $(location).prop("href", "preparaciones.php");
+        if (text > 0) {
+          alert("Actualizado Correctamente!");
+          window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);

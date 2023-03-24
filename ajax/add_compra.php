@@ -14,15 +14,16 @@ if ($resultado) {
     $get_producto = "SELECT cantidad, precio FROM productos WHERE id = $producto LIMIT 1;";
     $resultado_get = mysqli_query($con, $get_producto);
     $row = mysqli_fetch_array($resultado_get);
-    if ($row['precio'] > $precio) {
+    $total = (float)$row['cantidad'] + (float)$cantidad;
+    $precioU = (((float)$row['precio'] * (float)$row['cantidad']) + ((float)$precio * (float)$cantidad)) / $total;
+    if ($row['precio'] > $precioU) {
         $status = 0;
-    } else if ($row['precio'] < $precio) {
+    } else if ($row['precio'] < $precioU) {
         $status = 1;
     } else {
         $status = 2;
     }
-    $total = (float)$row['cantidad'] + (float)$cantidad;
-    $update_producto = "UPDATE productos SET status = $status, cantidad=$total, precio=$precio WHERE id = $producto;";
+    $update_producto = "UPDATE productos SET status = $status, cantidad=$total, precio=$precioU WHERE id = $producto;";
     $resultado_update = mysqli_query($con, $update_producto);
     if ($resultado_update) {
         echo 1;
