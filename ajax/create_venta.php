@@ -51,7 +51,7 @@ if ($id == null) {
         $resultado_get = mysqli_query($con, $get_venta);
         $row = mysqli_fetch_array($resultado_get);
         $valor = $row['valor'];
-        $total = $valor + $precio;
+        $total = $valor + ($precio * $cantidad);
         $update_receta = "UPDATE diario SET valor=$total WHERE id = $id;";
         $resultado_update = mysqli_query($con, $update_receta);
         if ($resultado_update) {

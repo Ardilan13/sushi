@@ -267,10 +267,7 @@ $("#agg_venta").on("click", function (e) {
     success: function (text) {
       if (text > 0) {
         alert("Venta guardada!");
-        $(location).prop(
-          "href",
-          "ajax/descargar_excel_venta.php?id=" + $(this).val()
-        );
+        window.history.go(-1);
       } else {
         alert("Error, intente nuevamente.");
         console.log(text);
@@ -661,7 +658,7 @@ $("#update_ing").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Ingrediente y valor actualizados!");
-          $(location).prop("href", "preparaciones.php");
+          window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
           alert(text);

@@ -19,7 +19,7 @@ if ($resultado) {
                 $id_producto = $row1['id'];
                 $cantidad_producto = $row1['cantidad'];
                 $cantidad_preparacion = $row1['preparacion'];
-                $total = $cantidad_producto - ($cantidad_preparacion * $cantidad);
+                $total = $cantidad_producto - ($cantidad_preparacion);
                 $update_producto = "UPDATE `productos` SET cantidad=$total WHERE id = $id_producto";
                 $resultado3 = mysqli_query($con, $update_producto);
                 if ($resultado3) {
