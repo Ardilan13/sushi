@@ -7,6 +7,7 @@ $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
 $tipo = $_POST["tipo"];
 $valor = $_POST["valor"] ?? null;
+$fecha = date("Y-m-d");
 
 $actualizar_pre = "UPDATE `preparaciones` SET `nombre`='$nombre',`unidad`='$unidad' WHERE id = $id";
 $resultado = mysqli_query($con, $actualizar_pre);
@@ -23,7 +24,13 @@ if ($resultado) {
                 $update_producto = "UPDATE `productos` SET cantidad=$total WHERE id = $id_producto";
                 $resultado3 = mysqli_query($con, $update_producto);
                 if ($resultado3) {
-                    echo 1;
+                    $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$id_producto','$fecha',3,$cantidad_preparacion);";
+                    $resultado1 = mysqli_query($con, $crear_prod);
+                    if ($resultado1) {
+                        echo 1;
+                    } else {
+                        echo 0;
+                    }
                 }
             }
         } else {
@@ -39,7 +46,13 @@ if ($resultado) {
                 $crear_prod = "UPDATE `productos` SET cantidad=$total WHERE id = $id_pro";
                 $resultado1 = mysqli_query($con, $crear_prod);
                 if ($resultado1) {
-                    echo 1;
+                    $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$id_pro','$fecha',2,$cantidad);";
+                    $resultado1 = mysqli_query($con, $crear_prod);
+                    if ($resultado1) {
+                        echo 1;
+                    } else {
+                        echo 0;
+                    }
                 } else {
                     echo 0;
                 }
@@ -48,7 +61,23 @@ if ($resultado) {
             $crear_prod = "INSERT INTO productos(nombre,tipo, unidad, cantidad, precio) VALUES ('$nombre',0,$unidad,$cantidad,$valor);";
             $resultado1 = mysqli_query($con, $crear_prod);
             if ($resultado1) {
-                echo 1;
+                $nombre_producto = "SELECT id,cantidad FROM productos WHERE nombre = '$nombre' ORDER BY id DESC LIMIT 1;";
+                $resultado5 = mysqli_query($con, $nombre_producto);
+                if ($resultado5->num_rows > 0) {
+                    while ($row4 = mysqli_fetch_assoc($resultado5)) {
+                        $id_pro = $row4['id'];
+                        $cantidad_pro = $row4['cantidad'];
+                        $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$id_pro','$fecha',2,$cantidad);";
+                        $resultado1 = mysqli_query($con, $crear_prod);
+                        if ($resultado1) {
+                            echo 1;
+                        } else {
+                            echo 0;
+                        }
+                    }
+                } else {
+                    echo 0;
+                }
             } else {
                 echo 0;
             }
