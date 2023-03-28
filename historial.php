@@ -136,6 +136,34 @@ if ($resultado->num_rows > 0) {
                                     <td><?php echo $mes; ?></td>
                                     <td><?php echo $ano; ?></td>
                                     <td><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
+                                    <td><b>Preparacion</b></td>
+                            </tr>
+                        <?php }
+                    }
+
+                    $historial_mov = "SELECT * FROM movimientos WHERE id_producto = $id AND (tipo = 4 OR tipo = 5) ORDER BY fecha DESC;";
+                    $resultado = mysqli_query($con, $historial_mov);
+                    if ($resultado->num_rows > 0) {
+                        while ($row = mysqli_fetch_assoc($resultado)) {
+                            $dia = date("d", strtotime($row["fecha"]));
+                            $mes = date("m", strtotime($row["fecha"]));
+                            $ano = date("Y", strtotime($row["fecha"])); ?>
+                            <tr>
+                                <?php if ($row["tipo"] == 5) { ?>
+                                    <td class="status_1">
+                                    <?php } else if ($row["tipo"] == 4) { ?>
+                                    <td class="status_0">
+                                    <?php } ?>
+                                    <?php if ($row["tipo"] == 5) {
+                                        echo 'Salida';
+                                    } else if ($row["tipo"] == 4) {
+                                        echo 'Entrada';
+                                    } ?>
+                                    </td>
+                                    <td><?php echo $dia; ?></td>
+                                    <td><?php echo $mes; ?></td>
+                                    <td><?php echo $ano; ?></td>
+                                    <td><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
                                     <td><b>Produccion</b></td>
                             </tr>
                     <?php }
