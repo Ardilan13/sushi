@@ -29,7 +29,7 @@ if ($resultado) {
                     if ($resultado1) {
                         echo 1;
                     } else {
-                        echo 0;
+                        echo $crear_prod;
                     }
                 }
             }
@@ -51,10 +51,10 @@ if ($resultado) {
                     if ($resultado1) {
                         echo 1;
                     } else {
-                        echo 0;
+                        echo $ccrear_prod;
                     }
                 } else {
-                    echo 0;
+                    echo $nombre_producto;
                 }
             }
         } else {
@@ -72,14 +72,14 @@ if ($resultado) {
                         if ($resultado1) {
                             echo 1;
                         } else {
-                            echo 0;
+                            echo $crear_prod;
                         }
                     }
                 } else {
-                    echo 0;
+                    echo $nombre_producto;
                 }
             } else {
-                echo 0;
+                echo $crear_prod;
             }
         }
     } else {
