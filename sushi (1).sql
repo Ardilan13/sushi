@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-03-2023 a las 02:11:26
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 30-03-2023 a las 05:50:18
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ INSERT INTO `compra` (`id`, `id_producto`, `fecha`, `cantidad`, `precio`) VALUES
 (4, 1, '2023-03-22', 1000.0, 1500.00),
 (5, 1, '2023-03-23', 1100.0, 1100.00),
 (6, 1, '2023-03-23', 100.0, 1000.00),
-(7, 3, '2023-03-30', 120.0, 555.00);
+(7, 3, '2023-03-29', 100.0, 1000.00);
 
 -- --------------------------------------------------------
 
@@ -70,13 +70,21 @@ INSERT INTO `cuentas` (`id`, `tipo`, `id_preparacion`, `id_diario`, `cantidad`, 
 (1, 0, 1, 1, 1000.00, 100.00),
 (2, 0, 1, 2, 150.00, 1200.00),
 (3, 0, 1, 2, 10.00, 1000.00),
-(4, 0, 4, 3, 5.00, 1000.00),
-(5, 1, 4, 3, 5.00, 2000.00),
-(6, 0, 4, 4, 100.00, 1500.00),
-(7, 1, 6, 4, 25.00, 12000.00),
-(8, 0, 1, 4, 20.00, 1200.00),
-(9, 0, 3, 5, 125.00, 5000.00),
-(10, 1, 4, 5, 10.00, 15000.00);
+(4, 0, 1, 2, 10.00, 120.00),
+(5, 0, 3, 3, 10.00, 1120.00),
+(6, 1, 7, 3, 50.00, 1050.00),
+(7, 1, 7, 4, 10.00, 1111.00),
+(8, 1, 7, 4, 20.00, 1250.00),
+(9, 1, 6, 5, 12.00, 123123.00),
+(10, 1, 6, 6, 10.00, 111.00),
+(11, 1, 6, 7, 10.00, 12.00),
+(12, 1, 2, 8, 2.00, 121.00),
+(13, 1, 2, 9, 2.00, 12.00),
+(14, 1, 6, 10, 12.00, 1234.00),
+(15, 1, 4, 11, 12.00, 1213.00),
+(16, 1, 4, 12, 12.00, 120.00),
+(17, 1, 4, 13, 23.00, 12312.00),
+(18, 1, 4, 14, 123.00, 1231.00);
 
 -- --------------------------------------------------------
 
@@ -97,10 +105,19 @@ CREATE TABLE `diario` (
 
 INSERT INTO `diario` (`id`, `fecha`, `valor`, `status`) VALUES
 (1, '2023-03-23', 100.00, 1),
-(2, '2023-03-24', 11200.00, NULL),
-(3, '2023-03-24', 7000.00, NULL),
-(4, '2023-03-25', 474000.00, 1),
-(5, '2023-03-27', 775000.00, 1);
+(2, '2023-03-24', 12400.00, 1),
+(3, '2023-03-29', 63700.00, 1),
+(4, '2023-03-30', 36110.00, 1),
+(5, '2023-03-30', 1477476.00, 1),
+(6, '2023-03-29', 1110.00, 1),
+(7, '2023-03-30', 120.00, 1),
+(8, '2023-03-31', 242.00, 1),
+(9, '2023-03-30', 24.00, 1),
+(10, '2023-03-31', 14808.00, 1),
+(11, '2023-03-31', 14556.00, 1),
+(12, '2023-03-15', 1440.00, 1),
+(13, '2023-03-01', 283176.00, 1),
+(14, '2023-03-17', 151413.00, 1);
 
 -- --------------------------------------------------------
 
@@ -127,9 +144,9 @@ INSERT INTO `ingredientes` (`id`, `tipo`, `id_preparacion`, `id_producto`, `cant
 (3, 0, 3, 1, 5, 100),
 (4, 0, 3, 3, 1, 500),
 (5, 0, 2, 4, 5, 100),
-(6, 0, 6, 3, 1, 2000),
-(7, 0, 6, 4, 1, 1500),
-(8, 0, 4, 3, 10, 2000);
+(6, 0, 7, 3, 1, 1100),
+(7, 0, 6, 4, 2, 1200),
+(8, 0, 4, 4, 10, 121);
 
 -- --------------------------------------------------------
 
@@ -143,7 +160,7 @@ CREATE TABLE `movimientos` (
   `tipo` int(2) NOT NULL,
   `fecha` date NOT NULL,
   `cantidad` double(10,2) NOT NULL,
-  `motivo` text DEFAULT NULL
+  `motivo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -151,13 +168,7 @@ CREATE TABLE `movimientos` (
 --
 
 INSERT INTO `movimientos` (`id`, `id_producto`, `tipo`, `fecha`, `cantidad`, `motivo`) VALUES
-(1, 1, 1, '2023-03-23', 100.00, 'asd'),
-(2, 1, 1, '2023-03-23', 3010.00, 'asda'),
-(3, 3, 0, '2023-03-25', 15.00, 'prueba'),
-(4, 3, 1, '2023-03-31', 445.00, 'prueba'),
-(5, 1, 3, '2023-03-24', 10.00, NULL),
-(6, 1, 3, '2023-03-24', 5.00, NULL),
-(7, 3, 2, '2023-03-24', 10.00, NULL);
+(17, 12, 1, '2023-02-15', 12.00, 'safsdf');
 
 -- --------------------------------------------------------
 
@@ -182,9 +193,10 @@ INSERT INTO `preparaciones` (`id`, `nombre`, `tipo`, `unidad`, `cantidad`, `valo
 (1, 'prueba_sushi', 1, 1, NULL, 6000.00),
 (2, 'prueba', 2, 1, NULL, 500.00),
 (3, 'dilan', 1, 1, NULL, 1000.00),
-(4, 'dilan', 2, 2, NULL, 20000.00),
+(4, 'dilan', 2, 2, NULL, 1210.00),
 (5, 'prueba12345', 1, 3, NULL, NULL),
-(6, 'SISTEMAS DIGITALES123456', 2, 3, NULL, 3500.00);
+(6, 'SISTEMAS DIGITALES123456', 2, 3, NULL, 2400.00),
+(7, 'hola123', 2, 3, NULL, 1100.00);
 
 -- --------------------------------------------------------
 
@@ -209,9 +221,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `status`, `tipo`, `proveedor`, `unidad`, `merma`, `cantidad`, `precio`) VALUES
-(1, 'prueba', 0, 1, 'si', 1, 0, 15.00, 1000.00),
-(3, 'prueba_sushi', 0, 0, NULL, 1, 0, 449.00, 5248.10),
-(4, 'dilan', NULL, 0, NULL, 1, 0, -10.00, 1000.00);
+(1, 'prueba', 0, 1, 'si', 1, 0, -120.00, 1000.00),
+(3, 'prueba_sushi', 0, 0, NULL, 1, 0, 20.00, 1018.18),
+(4, 'dilan', NULL, 0, NULL, 1, 0, -1798.00, 1000.00),
+(5, 'inicial', NULL, 1, 'tokio', 1, 0, 25.00, 1200.00);
 
 -- --------------------------------------------------------
 
@@ -267,7 +280,7 @@ ALTER TABLE `ingredientes`
 --
 ALTER TABLE `movimientos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `producto_movimiento` (`id_producto`);
+  ADD KEY `gjghjh` (`id_producto`);
 
 --
 -- Indices de la tabla `preparaciones`
@@ -301,13 +314,13 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `diario`
 --
 ALTER TABLE `diario`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
@@ -319,19 +332,19 @@ ALTER TABLE `ingredientes`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `preparaciones`
 --
 ALTER TABLE `preparaciones`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo`
@@ -360,12 +373,6 @@ ALTER TABLE `cuentas`
 --
 ALTER TABLE `ingredientes`
   ADD CONSTRAINT `preparacion` FOREIGN KEY (`id_preparacion`) REFERENCES `preparaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `movimientos`
---
-ALTER TABLE `movimientos`
-  ADD CONSTRAINT `producto_movimiento` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
