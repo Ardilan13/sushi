@@ -29,9 +29,9 @@ if ($resultado) {
                                 $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
                                 $resultado_update = mysqli_query($con, $update_producto);
                                 if ($resultado_update) {
-                                    echo 1;
                                     $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
                                     $resultado_update = mysqli_query($con, $update_diario);
+                                    echo 1;
                                 }
                             }
                         }
@@ -48,6 +48,19 @@ if ($resultado) {
                             echo 1;
                             $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
                             $resultado_update = mysqli_query($con, $update_diario);
+
+                            $get_diario = "SELECT fecha FROM diario WHERE id = $id;";
+                            $resultado_get = mysqli_query($con, $get_diario);
+                            $row2 = mysqli_fetch_array($resultado_get);
+                            $fecha = $row2['fecha'];
+                            $cantidad_pro1 = (float)$cantidad;
+                            $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$receta','$fecha',7,$cantidad_pro1);";
+                            $resultado5 = mysqli_query($con, $crear_prod);
+                            if ($resultado5) {
+                                echo 1;
+                            } else {
+                                echo $crear_prod;
+                            }
                         }
                     }
                 }

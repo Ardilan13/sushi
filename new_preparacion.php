@@ -139,6 +139,9 @@ $con = conectar(); ?>
                             </div>
                             <input hidden value="<?php echo $row['valor']; ?>" type="text" id="valor" name="valor" required>
 
+                            <?php if ($row["tipo"] == 2) { ?>
+                                <button id="historial_rec">Historial</button>
+                            <?php } ?>
                             <button id="new_ing">Nuevo Ingrediente</button>
                             <!-- <?php if ($row["tipo"] == 2) { ?>
                                 <button id="<?php echo $row['id'] ?>" class="add_pre_rec">Agregar Preparacion</button>

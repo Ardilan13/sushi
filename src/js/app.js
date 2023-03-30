@@ -532,6 +532,43 @@ $("#new_ing").on("click", function (e) {
   $(location).prop("href", "new_ingrediente.php?id=" + $("#id").val());
 });
 
+$("#historial_rec").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop("href", "historial_recetas.php?id=" + $("#id").val());
+});
+
+$("#save_pre").on("click", function (e) {
+  e.preventDefault();
+
+  if (
+    $("#unidad").val().length > 0 &&
+    $("#nombre").val().length > 0 &&
+    $("#cantidad").val().length > 0
+  ) {
+    $.ajax({
+      url: "ajax/update_preparacion.php",
+      data: $("#new_preparacion").serialize(),
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text > 0) {
+          alert("Actualizado Correctamente!");
+          window.history.go(-1);
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  } else {
+    alert("Llena todos los campos.");
+  }
+});
+
 $("#save_pre").on("click", function (e) {
   e.preventDefault();
 
@@ -777,6 +814,34 @@ $(".delete_com").on("click", function (e) {
   }
 });
 
+$(".delete_pro").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+  nombre = $(this).attr("name");
+
+  if (confirm("Desea borrar el producto " + nombre + "?")) {
+    $.ajax({
+      url: "ajax/delete_producto.php",
+      data: "id=" + id,
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Producto eliminado!");
+          $(location).prop("href", "productos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
 $("#receta").change(function () {
   //poner que tipo de unidad es el producto
   var valor = $("#receta option:selected").attr("valor");
@@ -967,4 +1032,33 @@ $(document).ready(function () {
       $("#producto").html(text);
     },
   });
+
+  total = 0;
+  $(".historial tbody tr").each(function (i) {
+    cantidad = parseFloat($(this).find(".cantidad").html());
+    total = total + cantidad;
+  });
+  $("#inventario").val(total);
+});
+
+$(".historial").click(function (e) {
+  e.preventDefault();
+  total = 0;
+
+  $(".historial tbody tr").each(function (i) {
+    cantidad = parseFloat($(this).find(".cantidad").html());
+    total = total + cantidad;
+  });
+  $("#inventario").val(total);
+});
+
+$(".refresh").click(function (e) {
+  e.preventDefault();
+  total = 0;
+
+  $(".historial tbody tr").each(function (i) {
+    cantidad = parseFloat($(this).find(".cantidad").html());
+    total = total + cantidad;
+  });
+  $("#inventario").val(total);
 });
