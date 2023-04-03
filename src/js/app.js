@@ -229,9 +229,11 @@ $("#agg_producto_venta").on("click", function (e) {
               if (text1 == 1) {
                 alert("Producto Agregado a venta!");
                 $(location).prop("href", "ventas.php");
-              } else {
+              } else if (text1 == 0) {
                 alert("Error, intente nuevamente.");
-                console(text1);
+                console.log(text1);
+              } else {
+                alert(text1);
               }
             },
             error: function (xhr, status, errorThrown) {
@@ -269,7 +271,7 @@ $("#agg_venta").on("click", function (e) {
         alert("Venta guardada!");
         window.history.go(-1);
       } else {
-        alert("Error, intente nuevamente.");
+        alert(text);
         console.log(text);
       }
     },
@@ -296,9 +298,11 @@ $("#agg_receta_venta").on("click", function (e) {
         if (text == 1) {
           alert("Receta Agregado a venta!");
           $(location).prop("href", "ventas.php");
-        } else {
+        } else if (text == 0) {
           alert("Error, intente nuevamente.");
           console(text);
+        } else {
+          alert(text);
         }
       },
       error: function (xhr, status, errorThrown) {
