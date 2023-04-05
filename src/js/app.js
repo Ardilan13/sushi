@@ -559,37 +559,7 @@ $("#save_pre").on("click", function (e) {
         if (text > 0) {
           alert("Actualizado Correctamente!");
           window.history.go(-1);
-        } else {
-          alert("Error, intente nuevamente.");
           console.log(text);
-        }
-      },
-      error: function (xhr, status, errorThrown) {
-        alert("Error");
-      },
-    });
-  } else {
-    alert("Llena todos los campos.");
-  }
-});
-
-$("#save_pre").on("click", function (e) {
-  e.preventDefault();
-
-  if (
-    $("#unidad").val().length > 0 &&
-    $("#nombre").val().length > 0 &&
-    $("#cantidad").val().length > 0
-  ) {
-    $.ajax({
-      url: "ajax/update_preparacion.php",
-      data: $("#new_preparacion").serialize(),
-      type: "POST",
-      dataType: "text",
-      success: function (text) {
-        if (text > 0) {
-          alert("Actualizado Correctamente!");
-          window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);
