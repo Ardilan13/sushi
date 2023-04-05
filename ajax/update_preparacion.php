@@ -49,7 +49,7 @@ if ($resultado) {
                     $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$id_pro','$fecha',2,$cantidad);";
                     $resultado1 = mysqli_query($con, $crear_prod);
                     if ($resultado1) {
-                        echo $crear_prod;
+                        echo 1;
                     } else {
                         echo $crear_prod;
                     }
