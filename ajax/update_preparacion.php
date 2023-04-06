@@ -7,7 +7,7 @@ $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
 $tipo = $_POST["tipo"];
 $valor = $_POST["valor"] ?? null;
-$fecha = date("Y-m-d");
+$fecha = $_POST["fecha"] ?? date("Y-m-d");
 
 $actualizar_pre = "UPDATE `preparaciones` SET `nombre`='$nombre',`unidad`='$unidad' WHERE id = $id";
 $resultado = mysqli_query($con, $actualizar_pre);
@@ -36,14 +36,16 @@ if ($resultado) {
         } else {
             echo 0;
         }
-        $nombre_producto = "SELECT id,cantidad FROM productos WHERE nombre = '$nombre' LIMIT 1;";
+        $nombre_producto = "SELECT id,cantidad,precio FROM productos WHERE nombre = '$nombre' LIMIT 1;";
         $resultado4 = mysqli_query($con, $nombre_producto);
         if ($resultado4->num_rows > 0) {
             while ($row2 = mysqli_fetch_assoc($resultado4)) {
                 $id_pro = $row2['id'];
                 $cantidad_pro = $row2['cantidad'];
+                $precio_pro = $row2['precio'];
                 $total = $cantidad_pro + $cantidad;
-                $crear_prod = "UPDATE `productos` SET cantidad=$total WHERE id = $id_pro";
+                $precio_total = (($precio_pro * $cantidad_pro) + $valor) / $total;
+                $crear_prod = "UPDATE `productos` SET cantidad=$total,precio='$precio_total' WHERE id = $id_pro";
                 $resultado1 = mysqli_query($con, $crear_prod);
                 if ($resultado1) {
                     $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$id_pro','$fecha',2,$cantidad);";
@@ -58,7 +60,8 @@ if ($resultado) {
                 }
             }
         } else {
-            $crear_prod = "INSERT INTO productos(nombre,tipo, unidad, cantidad, precio) VALUES ('$nombre',0,$unidad,$cantidad,$valor);";
+            $valor_pro = $valor / $cantidad;
+            $crear_prod = "INSERT INTO productos(nombre,tipo, unidad, cantidad, precio) VALUES ('$nombre',0,$unidad,$cantidad,$valor_pro);";
             $resultado1 = mysqli_query($con, $crear_prod);
             if ($resultado1) {
                 $nombre_producto = "SELECT id,cantidad FROM productos WHERE nombre = '$nombre' ORDER BY id DESC LIMIT 1;";

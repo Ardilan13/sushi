@@ -121,6 +121,10 @@ $con = conectar(); ?>
                                     <label for="cantidad">Cantidad:</label>
                                     <input value="<?php echo $row['cantidad']; ?>" type="text" min="0" id="cantidad" name="cantidad" required>
                                 </div>
+                                <div class="input">
+                                    <label for="fecha">Fecha:</label>
+                                    <input type="date" id="fecha" name="fecha" required>
+                                </div>
                             <?php } else { ?>
                                 <input hidden value="0" type="text" min="0" id="cantidad" name="cantidad" required>
                             <?php } ?>

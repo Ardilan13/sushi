@@ -545,11 +545,7 @@ $("#historial_rec").on("click", function (e) {
 $("#save_pre").on("click", function (e) {
   e.preventDefault();
 
-  if (
-    $("#unidad").val().length > 0 &&
-    $("#nombre").val().length > 0 &&
-    $("#cantidad").val().length > 0
-  ) {
+  if ($("#unidad").val().length > 0 && $("#nombre").val().length > 0) {
     $.ajax({
       url: "ajax/update_preparacion.php",
       data: $("#new_preparacion").serialize(),
@@ -804,6 +800,62 @@ $(".delete_pro").on("click", function (e) {
         if (text == 1) {
           alert("Producto eliminado!");
           $(location).prop("href", "productos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
+$(".delete_pro").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+  nombre = $(this).attr("name");
+
+  if (confirm("Desea borrar el producto " + nombre + "?")) {
+    $.ajax({
+      url: "ajax/delete_producto.php",
+      data: "id=" + id,
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Producto eliminado!");
+          $(location).prop("href", "productos.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
+$(".delete_pre").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+  nombre = $(this).attr("name");
+
+  if (confirm("Desea borrar la preparacion " + nombre + "?")) {
+    $.ajax({
+      url: "ajax/delete_preparacion.php",
+      data: "id=" + id,
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Preparacion eliminada!");
+          $(location).prop("href", "preparaciones.php");
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);
