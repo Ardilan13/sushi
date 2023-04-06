@@ -7,7 +7,7 @@ $unidad = $_POST["unidad"];
 $cantidad = $_POST["cantidad"];
 $tipo = $_POST["tipo"];
 $valor = $_POST["valor"] ?? null;
-$fecha = $_POST["fecha"] ?? date("Y-m-d");
+$fecha = $_POST["fecha"] == "" || $_POST['fecha'] == null ? date("Y-m-d") : $_POST["fecha"];
 
 $actualizar_pre = "UPDATE `preparaciones` SET `nombre`='$nombre',`unidad`='$unidad' WHERE id = $id";
 $resultado = mysqli_query($con, $actualizar_pre);
