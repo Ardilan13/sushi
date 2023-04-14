@@ -89,7 +89,7 @@ $con = conectar(); ?>
                                                 <?php } ?>
                                                 <td id="valor_ing"><?php echo $row1['valor']; ?></td>
                                                 <td class="mid"><?php echo $row1['cantidad'] . " " . $und ?></td>
-                                                <td id="valor_ing"><?php echo number_format($valor, 2); ?></td>
+                                                <td id="valor_ing"><?php echo number_format($valor, 3); ?></td>
                                                 <td class="mid">
                                                     <?php if ($row1["tipo"] == 0) { ?>
                                                         <button class="edit edit_pre_pro" id="<?php echo $row1["id"]; ?>">

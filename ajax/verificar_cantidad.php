@@ -11,7 +11,7 @@ if ($resultado->num_rows > 0) {
         if ($cantidad <= $row['cantidad'] || $tipo == 0) {
             echo 1;
         } else {
-            echo number_format($row['cantidad'], 1);
+            echo number_format($row['cantidad'], 3);
         }
     }
 } else {

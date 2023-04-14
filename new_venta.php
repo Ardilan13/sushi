@@ -63,9 +63,9 @@ $con = conectar(); ?>
                                                     <tr>
                                                         <td><?php echo $row2['nombre']; ?></td>
                                                         <td><?php echo $tipo; ?></td>
-                                                        <td><?php echo number_format($row2['valor'], 2); ?></td>
-                                                        <td class="mid"><?php echo number_format($row2['cantidad'], 2) . " " . $und ?></td>
-                                                        <td><?php echo number_format($row2['valor'] * $row2['cantidad'], 2); ?></td>
+                                                        <td><?php echo number_format($row2['valor'], 3); ?></td>
+                                                        <td class="mid"><?php echo number_format($row2['cantidad'], 3) . " " . $und ?></td>
+                                                        <td><?php echo number_format($row2['valor'] * $row2['cantidad'], 3); ?></td>
                                                     </tr>
                                             <?php }
                                             } ?>

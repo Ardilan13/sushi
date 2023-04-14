@@ -57,10 +57,10 @@ $con = conectar(); ?>
                                 </td>
                                 <td><?php echo $row["proveedor"]; ?></td>
                                 <td class="min"><?php echo $row["merma"]; ?></td>
-                                <td class="precio status_<?php echo $row['status']; ?>"><?php echo number_format($row["precio"], 2); ?></td>
-                                <td class="precio status_<?php echo $row['status']; ?>"><?php echo number_format(($row["precio"] + $row["precio"] * $merma), 2); ?></td>
-                                <td class="mid"><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
-                                <td class="precio"><?php echo number_format($total, 2); ?></td>
+                                <td class="precio status_<?php echo $row['status']; ?>"><?php echo number_format($row["precio"], 3); ?></td>
+                                <td class="precio status_<?php echo $row['status']; ?>"><?php echo number_format(($row["precio"] + $row["precio"] * $merma), 3); ?></td>
+                                <td class="mid"><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?></td>
+                                <td class="precio"><?php echo number_format($total, 3); ?></td>
                                 <td class="min">
                                     <button class="edit edit_pro" id="<?php echo $row["id"]; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -95,7 +95,7 @@ $con = conectar(); ?>
             <form>
                 <div class="input">
                     <label for="inventario">Valor inventario:</label>
-                    <input disabled type="text" value="<?php echo number_format($suma, 2); ?>">
+                    <input disabled type="text" value="<?php echo number_format($suma, 3); ?>">
                 </div>
             </form>
 

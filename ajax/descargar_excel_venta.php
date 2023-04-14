@@ -29,7 +29,7 @@ header('Content-Disposition: attachment; filename=venta_' . $id . '.xls'); ?>
                     <td><?php echo $dia; ?></td>
                     <td><?php echo $mes; ?></td>
                     <td><?php echo $ano; ?></td>
-                    <td><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
+                    <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?></td>
                     <td><b>Venta Producto</b></td>
                 </tr>
             <?php }
@@ -46,7 +46,7 @@ header('Content-Disposition: attachment; filename=venta_' . $id . '.xls'); ?>
                     <td><?php echo $dia; ?></td>
                     <td><?php echo $mes; ?></td>
                     <td><?php echo $ano; ?></td>
-                    <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 2) . ' ' . $und; ?></td>
+                    <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?></td>
                     <td><b>Venta Receta</b></td>
                 </tr>
         <?php }

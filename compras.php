@@ -40,9 +40,9 @@ $con = conectar(); ?>
                                 <td><?php echo $row["id"]; ?></td>
                                 <td><?php echo $row["producto"]; ?></td>
                                 <td class="precio"><?php echo $row["fecha"]; ?></td>
-                                <td class="status_<?php echo $row['status']; ?>"><?php echo number_format($row["precio"], 2); ?></td>
-                                <td class="mid"><?php echo number_format($row["cantidad"], 2) . ' ' . $und; ?></td>
-                                <td><?php echo number_format(($row["precio"] * $row["cantidad"]), 2) ?></td>
+                                <td class="status_<?php echo $row['status']; ?>"><?php echo number_format($row["precio"], 3); ?></td>
+                                <td class="mid"><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?></td>
+                                <td><?php echo number_format(($row["precio"] * $row["cantidad"]), 3) ?></td>
                                 <?php if ($_SESSION["id"] == 'admin') { ?>
                                     <td class="min">
                                         <button class="delete delete_com" id="<?php echo $row["id"]; ?>">

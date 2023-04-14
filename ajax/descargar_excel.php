@@ -28,7 +28,7 @@ header('Content-Disposition: attachment; filename=inventario_' . date("d-M-Y") .
             <td><?php echo ($row["precio"] + $row['precio'] * $merma); ?></td>
             <td><?php echo $row["cantidad"]; ?></td>
             <td></td>
-            <td><?php echo number_format($total, 2); ?></td>
+            <td><?php echo number_format($total, 3); ?></td>
         </tr>
     <?php } ?>
 </table>

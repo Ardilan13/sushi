@@ -107,7 +107,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 2) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                 <td><b>Venta Receta</b></td>
                             </tr>
                         <?php }

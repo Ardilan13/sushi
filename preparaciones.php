@@ -38,7 +38,7 @@ $con = conectar(); ?>
                             <tr>
                                 <td><?php echo $row["id"]; ?></td>
                                 <td><?php echo $row["nombre"]; ?></td>
-                                <td><?php echo number_format($row["valor"], 2); ?></td>
+                                <td><?php echo number_format($row["valor"], 3); ?></td>
                                 <?php if ($_SESSION["id"] == 'admin') { ?>
                                     <td class="min">
                                         <button class="edit edit_pre" id="<?php echo $row["id"]; ?>">

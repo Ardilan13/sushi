@@ -6,7 +6,7 @@ $get_precio = "SELECT precio,cantidad FROM productos WHERE id = $id ORDER BY nom
 $resultado = mysqli_query($con, $get_precio);
 if ($resultado->num_rows > 0) {
     while ($row = mysqli_fetch_assoc($resultado)) {
-        $lista['precio'] = number_format($row['precio'], 2);
+        $lista['precio'] = number_format($row['precio'], 3);
         $lista['valor'] = $row['precio'];
         $lista['cantidad'] = $row['cantidad'];
     }
