@@ -840,12 +840,43 @@ $(".delete_pro").on("click", function (e) {
   }
 });
 
+$(".delete_ingrediente").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+  nombre = $(this).attr("name");
+  cantidad = $(this).attr("cantidad");
+  precio = $(this).attr("precio");
+  preparacion = $("#nombre").val();
+  valor = precio * cantidad;
+
+  if (confirm("Desea borrar el ingrediente " + nombre + "?")) {
+    $.ajax({
+      url: "ajax/delete_ingrediente.php",
+      data: { id: id, valor: valor, preparacion: preparacion },
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Ingrediente eliminado!");
+          $(location).prop("href", "preparaciones.php");
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
 $(".delete_pre").on("click", function (e) {
   e.preventDefault();
 
   id = $(this).attr("id");
   nombre = $(this).attr("name");
-
   if (confirm("Desea borrar la preparacion " + nombre + "?")) {
     $.ajax({
       url: "ajax/delete_preparacion.php",
@@ -855,7 +886,7 @@ $(".delete_pre").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Preparacion eliminada!");
-          $(location).prop("href", "preparaciones.php");
+          window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);
@@ -905,7 +936,7 @@ $("#producto").change(function () {
         //traen los datos en un json y se muestran en los placeholder
         var data = $.parseJSON(text);
         $("#precio").attr("placeholder", data.precio);
-        $("#valor").attr("placeholder", data.precio);
+        $("#valor").attr("placeholder", data.real);
         $("#cantidad").attr("placeholder", data.cantidad);
         $("#cantidad").attr("precio", data.valor);
         $("#cantidad").val("");
