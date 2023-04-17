@@ -812,34 +812,6 @@ $(".delete_pro").on("click", function (e) {
   }
 });
 
-$(".delete_pro").on("click", function (e) {
-  e.preventDefault();
-
-  id = $(this).attr("id");
-  nombre = $(this).attr("name");
-
-  if (confirm("Desea borrar el producto " + nombre + "?")) {
-    $.ajax({
-      url: "ajax/delete_producto.php",
-      data: "id=" + id,
-      type: "POST",
-      dataType: "text",
-      success: function (text) {
-        if (text == 1) {
-          alert("Producto eliminado!");
-          $(location).prop("href", "productos.php");
-        } else {
-          alert("Error, intente nuevamente.");
-          console.log(text);
-        }
-      },
-      error: function (xhr, status, errorThrown) {
-        alert("Error");
-      },
-    });
-  }
-});
-
 $(".delete_ingrediente").on("click", function (e) {
   e.preventDefault();
 
