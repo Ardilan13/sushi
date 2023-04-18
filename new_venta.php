@@ -33,7 +33,9 @@ $con = conectar(); ?>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
                                         <th>Valor</th>
-                                        <th>Borrar</th>
+                                        <?php if ($_SESSION["id"] == 'admin' && $row['status'] != 1) { ?>
+                                            <th>Borrar</th>
+                                        <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,7 +69,7 @@ $con = conectar(); ?>
                                                         <td><?php echo number_format($row2['valor'], 3); ?></td>
                                                         <td class="mid"><?php echo number_format($row2['cantidad'], 3) . " " . $und ?></td>
                                                         <td><?php echo number_format($row2['valor'] * $row2['cantidad'], 3); ?></td>
-                                                        <?php if ($_SESSION["id"] == 'admin') { ?>
+                                                        <?php if ($_SESSION["id"] == 'admin' && $row['status'] != 1) { ?>
                                                             <td class="min">
                                                                 <button class="edit delete delete_venta_pro" id="<?php echo $row2["id"]; ?>" name="<?php echo $row2["nombre"]; ?>">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
