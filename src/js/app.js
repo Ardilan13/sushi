@@ -770,7 +770,7 @@ $(".delete_com").on("click", function (e) {
       dataType: "text",
       success: function (text) {
         if (text == 1) {
-          alert("Compra eliminada y cantidad modificada!");
+          alert("Compra eliminada, cantidad y precio modificados!");
           $(location).prop("href", "compras.php");
         } else {
           alert("Error, intente nuevamente.");
@@ -858,6 +858,33 @@ $(".delete_pre").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Preparacion eliminada!");
+          window.history.go(-1);
+        } else {
+          alert("Error, intente nuevamente.");
+          console.log(text);
+        }
+      },
+      error: function (xhr, status, errorThrown) {
+        alert("Error");
+      },
+    });
+  }
+});
+
+$(".delete_venta_pro").on("click", function (e) {
+  e.preventDefault();
+
+  id = $(this).attr("id");
+  nombre = $(this).attr("name");
+  if (confirm("Desea borrar " + nombre + " de la venta?")) {
+    $.ajax({
+      url: "ajax/delete_producto_venta.php",
+      data: "id=" + id,
+      type: "POST",
+      dataType: "text",
+      success: function (text) {
+        if (text == 1) {
+          alert("Eliminado correctamente!");
           window.history.go(-1);
         } else {
           alert("Error, intente nuevamente.");
