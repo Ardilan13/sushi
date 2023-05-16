@@ -154,7 +154,7 @@ $con = conectar(); ?>
                             </div>
                             <div class="input">
                                 <label for="valor">Costo:</label>
-                                <input disabled value="<?php echo $row['valor']; ?>" type="text" id="nombre" name="nombre" required>
+                                <input disabled value="<?php echo number_format($row['valor'], 3); ?>" type="text" id="nombre" name="nombre" required>
                             </div>
                             <input hidden value="<?php echo $row['valor']; ?>" type="text" id="valor" name="valor" required>
 

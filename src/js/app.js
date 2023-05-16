@@ -464,6 +464,15 @@ $(".des_exc").on("click", function (e) {
   $(location).prop("href", "ajax/descargar_excel.php");
 });
 
+$("#export_venta").on("click", function (e) {
+  e.preventDefault();
+
+  $(location).prop(
+    "href",
+    "ajax/descargar_excel_venta.php?id=" + $(this).val()
+  );
+});
+
 $(".edit_pre").on("click", function (e) {
   e.preventDefault();
   $(location).prop("href", "new_preparacion.php?id=" + $(this).attr("id"));
@@ -1094,7 +1103,8 @@ $(document).ready(function () {
     cantidad = parseFloat($(this).find(".cantidad").html());
     total = total + cantidad;
   });
-  $("#inventario").val(total);
+  const formateado = total.toLocaleString("en");
+  $("#inventario").val(formateado);
 });
 
 $(".historial").click(function (e) {
@@ -1105,7 +1115,8 @@ $(".historial").click(function (e) {
     cantidad = parseFloat($(this).find(".cantidad").html());
     total = total + cantidad;
   });
-  $("#inventario").val(total);
+  const formateado = total.toLocaleString("en");
+  $("#inventario").val(formateado);
 });
 
 $(".refresh").click(function (e) {
@@ -1116,5 +1127,6 @@ $(".refresh").click(function (e) {
     cantidad = parseFloat($(this).find(".cantidad").html());
     total = total + cantidad;
   });
-  $("#inventario").val(total);
+  const formateado = total.toLocaleString("en");
+  $("#inventario").val(formateado);
 });

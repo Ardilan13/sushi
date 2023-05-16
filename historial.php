@@ -53,7 +53,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                 <td><b>Movimiento</b></td>
                             </tr>
                         <?php }
@@ -71,7 +71,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                 <td><b>Compra</b></td>
                             </tr>
                         <?php }
@@ -89,7 +89,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                 <td><b>Venta Producto</b></td>
                             </tr>
                         <?php }
@@ -107,7 +107,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"] * $row["receta"]; ?></span></td>
                                 <td><b>Venta Receta</b></td>
                             </tr>
                         <?php }
@@ -135,7 +135,7 @@ if ($resultado->num_rows > 0) {
                                     <td><?php echo $dia; ?></td>
                                     <td><?php echo $mes; ?></td>
                                     <td><?php echo $ano; ?></td>
-                                    <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                    <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                     <td><b>Preparacion</b></td>
                             </tr>
                         <?php }
@@ -163,7 +163,7 @@ if ($resultado->num_rows > 0) {
                                     <td><?php echo $dia; ?></td>
                                     <td><?php echo $mes; ?></td>
                                     <td><?php echo $ano; ?></td>
-                                    <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                    <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                     <td><b>Produccion</b></td>
                             </tr>
                         <?php }
@@ -182,7 +182,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $dia; ?></td>
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
-                                <td><?php echo $row["cantidad"] . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
                                 <td><b>Inicial</b></td>
                             </tr>
                     <?php }

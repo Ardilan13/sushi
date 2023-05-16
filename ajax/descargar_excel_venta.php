@@ -6,50 +6,62 @@ header('Content-Disposition: attachment; filename=venta_' . $id . '.xls'); ?>
 <table border="1">
     <thead>
         <tr>
-            <th colspan="4">VENTAS</th>
-        </tr>
-        <tr>
             <th>Nombre</th>
             <th>Tipo</th>
-            <th>Cantidad usada</th>
-            <th>Cantidad actual</th>
-            <th>Cantidad real</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
             <th>Valor</th>
         </tr>
     </thead>
     <tbody>
-        <?php $historial_ven = "SELECT d.fecha,c.* FROM cuentas c INNER JOIN diario d ON d.id = c.id_diario WHERE c.id_preparacion = $id AND tipo = 0 ORDER BY d.fecha DESC;";
-        $resultado = mysqli_query($con, $historial_ven);
+        <?php
+        $get_diario = "SELECT * from diario WHERE id = $id;";
+        $resultado = mysqli_query($con, $get_diario);
         if ($resultado->num_rows > 0) {
             while ($row = mysqli_fetch_assoc($resultado)) {
-                $dia = date("d", strtotime($row["fecha"]));
-                $mes = date("m", strtotime($row["fecha"]));
-                $ano = date("Y", strtotime($row["fecha"])); ?>
+                $get_cuentas = "SELECT id,tipo FROM cuentas WHERE id_diario = $id;";
+                $resultado1 = mysqli_query($con, $get_cuentas);
+                if ($resultado1->num_rows > 0) {
+                    while ($row1 = mysqli_fetch_assoc($resultado1)) {
+                        if ($row1['tipo'] == 0) {
+                            $tipo = 'Producto';
+                            $cuentas_diario = "SELECT *,(SELECT nombre FROM productos WHERE id = id_preparacion) as nombre,(SELECT unidad FROM productos WHERE id = id_preparacion) as unidad FROM cuentas WHERE id_diario = $id AND id = {$row1['id']};";
+                        } else if ($row1['tipo'] == 1) {
+                            $tipo = 'Receta';
+                            $cuentas_diario = "SELECT *,(SELECT nombre FROM preparaciones WHERE id = id_preparacion) as nombre,(SELECT unidad FROM preparaciones WHERE id = id_preparacion) as unidad FROM cuentas WHERE id_diario = $id AND id = {$row1['id']};";
+                        }
+                        $resultado2 = mysqli_query($con, $cuentas_diario);
+                        if ($resultado2->num_rows > 0) {
+                            while ($row2 = mysqli_fetch_assoc($resultado2)) {
+                                if ($row2["unidad"] == 1) {
+                                    $und = 'Kgs';
+                                } else if ($row2["unidad"] == 2) {
+                                    $und = 'Lts';
+                                } else  if ($row2["unidad"] == 3) {
+                                    $und = 'Und';
+                                } else {
+                                    $und = null;
+                                } ?>
+                                <tr>
+                                    <td><?php echo $row2['nombre']; ?></td>
+                                    <td><?php echo $tipo; ?></td>
+                                    <td><?php echo number_format($row2['valor'], 3); ?></td>
+                                    <td class="mid"><?php echo number_format($row2['cantidad'], 3) . " " . $und ?></td>
+                                    <td><?php echo number_format($row2['valor'] * $row2['cantidad'], 3); ?></td>
+                                </tr>
+                        <?php }
+                        } ?>
+                <?php }
+                } ?>
+                <tr></tr>
                 <tr>
-                    <td><?php echo $dia; ?></td>
-                    <td><?php echo $mes; ?></td>
-                    <td><?php echo $ano; ?></td>
-                    <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?></td>
-                    <td><b>Venta Producto</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Valor:</td>
+                    <td><?php echo number_format($row['valor'], 3); ?></td>
                 </tr>
-            <?php }
-        }
-
-        $historial_ven = "SELECT d.fecha,c.*,i.id_producto,i.cantidad as receta FROM cuentas c INNER JOIN diario d ON d.id = c.id_diario INNER JOIN ingredientes i ON c.id_preparacion = i.id_preparacion WHERE i.id_producto = $id AND c.tipo = 1 ORDER BY d.fecha DESC;";
-        $resultado = mysqli_query($con, $historial_ven);
-        if ($resultado->num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($resultado)) {
-                $dia = date("d", strtotime($row["fecha"]));
-                $mes = date("m", strtotime($row["fecha"]));
-                $ano = date("Y", strtotime($row["fecha"])); ?>
-                <tr>
-                    <td><?php echo $dia; ?></td>
-                    <td><?php echo $mes; ?></td>
-                    <td><?php echo $ano; ?></td>
-                    <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?></td>
-                    <td><b>Venta Receta</b></td>
-                </tr>
-        <?php }
-        } ?>
     </tbody>
 </table>
+<?php }
+        } ?>

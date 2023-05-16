@@ -49,7 +49,7 @@ $con = conectar(); ?>
                                                 $cuentas_diario = "SELECT *,(SELECT nombre FROM productos WHERE id = id_preparacion) as nombre,(SELECT unidad FROM productos WHERE id = id_preparacion) as unidad FROM cuentas WHERE id_diario = $id AND id = {$row1['id']};";
                                             } else if ($row1['tipo'] == 1) {
                                                 $tipo = 'Receta';
-                                                $cuentas_diario = "SELECT *,(SELECT nombre FROM preparaciones WHERE id = id_preparacion) as nombre,(SELECT unidad FROM productos WHERE id = id_preparacion) as unidad FROM cuentas WHERE id_diario = $id AND id = {$row1['id']};";
+                                                $cuentas_diario = "SELECT *,(SELECT nombre FROM preparaciones WHERE id = id_preparacion) as nombre,(SELECT unidad FROM preparaciones WHERE id = id_preparacion) as unidad FROM cuentas WHERE id_diario = $id AND id = {$row1['id']};";
                                             }
                                             $resultado2 = mysqli_query($con, $cuentas_diario);
                                             if ($resultado2->num_rows > 0) {
@@ -93,13 +93,15 @@ $con = conectar(); ?>
                             <button hidden id="clonar">clon</button>
                             <div class="input">
                                 <label for="valor">Valor:</label>
-                                <input disabled value="<?php echo $row['valor']; ?>" type="text" id="nombre" name="nombre" required>
+                                <input disabled value="<?php echo number_format($row['valor'], 3); ?>" type="text" id="valor_venta" name="valor_venta" required>
                             </div>
 
                             <?php if ($row['status'] != 1) { ?>
                                 <button type="submit" class="edit" value="<?php echo $id; ?>" id="agg_producto1">Agregar Producto</button>
                                 <button type="submit" value="<?php echo $id; ?>" id="agg_receta1">Agregar Receta</button>
                                 <button type="submit" value="<?php echo $id; ?>" id="agg_venta">Guardar</button>
+                            <?php } else { ?>
+                                <button type="submit" value="<?php echo $id; ?>" id="export_venta">Exportar</button>
                             <?php } ?>
 
                     <?php }
