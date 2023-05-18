@@ -113,7 +113,7 @@ if ($id == null) {
                 }
             }
 
-            if (isset($inventario) && $inventario < $check_producto + $cantidad) {
+            if (isset($inventario) && $inventario < ($check_producto + $cantidad)) {
                 echo "No hay suficiente $nombre en inventario, solo hay $inventario y ya se agregaron en venta $check_producto";
                 exit();
             }
