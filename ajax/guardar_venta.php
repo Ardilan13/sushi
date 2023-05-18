@@ -2,6 +2,10 @@
 $con = conectar();
 
 $id = $_POST["id"];
+$venta = 0;
+$productos = array();
+$inventario = array();
+$recetas = array();
 
 $get_cuentas = "SELECT * FROM cuentas WHERE id_diario = $id;";
 $resultado = mysqli_query($con, $get_cuentas);
@@ -14,87 +18,78 @@ if ($resultado) {
             $resultado1 = mysqli_query($con, $get_receta);
             if ($resultado1) {
                 while ($row1 = mysqli_fetch_assoc($resultado1)) {
-                    if ($row1['tipo'] == 1) {
-                        $preparacion = $row1['id_producto'];
-                        $get_preparacion = "SELECT * FROM ingredientes WHERE id_preparacion = $preparacion;";
-                        $resultado2 = mysqli_query($con, $get_preparacion);
-                        if ($resultado2) {
-                            while ($row2 = mysqli_fetch_assoc($resultado2)) {
-                                $producto = $row2['id_producto'];
-                                $cantidad_producto = $row2['cantidad'];
-                                $get_producto = "SELECT cantidad FROM productos WHERE id = $producto LIMIT 1;";
-                                $resultado_get = mysqli_query($con, $get_producto);
-                                $row3 = mysqli_fetch_array($resultado_get);
-                                $total = (float)$row3['cantidad'] - ((float)$cantidad * (float)$cantidad_producto);
-                                if ($total < 0) {
-                                    echo "No hay suficientes productos en inventario.";
-                                    exit;
-                                } else {
-                                    $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
-                                    $resultado_update = mysqli_query($con, $update_producto);
-                                    if ($resultado_update) {
-                                        $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
-                                        $resultado_update = mysqli_query($con, $update_diario);
-                                        echo 1;
-                                    }
-                                }
-                            }
-                        }
+                    $producto = $row1['id_producto'];
+                    $cantidad_producto = $row1['cantidad'];
+                    $get_producto = "SELECT nombre,cantidad FROM productos WHERE id = $producto LIMIT 1;";
+                    $resultado_get = mysqli_query($con, $get_producto);
+                    $row2 = mysqli_fetch_array($resultado_get);
+                    $total = (float)$row2['cantidad'] - ((float)$cantidad * $cantidad_producto);
+                    if ($total < 0) {
+                        $venta = 1;
+                        array_push($productos, $row2['nombre']);
                     } else {
-                        $producto = $row1['id_producto'];
-                        $cantidad_producto = $row1['cantidad'];
-                        $get_producto = "SELECT cantidad FROM productos WHERE id = $producto LIMIT 1;";
-                        $resultado_get = mysqli_query($con, $get_producto);
-                        $row2 = mysqli_fetch_array($resultado_get);
-                        $total = (float)$row2['cantidad'] - ((float)$cantidad * $cantidad_producto);
-                        if ($total < 0) {
-                            echo "No hay suficientes productos en inventario.";
-                            exit;
-                        } else {
-                            $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
-                            $resultado_update = mysqli_query($con, $update_producto);
-                            if ($resultado_update) {
-                                echo 1;
-                                $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
-                                $resultado_update = mysqli_query($con, $update_diario);
-
-                                $get_diario = "SELECT fecha FROM diario WHERE id = $id;";
-                                $resultado_get = mysqli_query($con, $get_diario);
-                                $row2 = mysqli_fetch_array($resultado_get);
-                                $fecha = $row2['fecha'];
-                                $cantidad_pro1 = (float)$cantidad;
-                                $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$receta','$fecha',7,$cantidad_pro1);";
-                                $resultado5 = mysqli_query($con, $crear_prod);
-                                if ($resultado5) {
-                                    echo 1;
-                                } else {
-                                    echo $crear_prod;
-                                }
+                        if (isset($inventario[$producto])) {
+                            $inventario[$producto] = (float)$inventario[$producto] - ((float)$cantidad * (float)$cantidad_producto);
+                            if ($inventario[$producto] < 0) {
+                                $venta = 1;
+                                array_push($productos, $row2['nombre']);
                             }
+                        } else {
+                            $inventario[$producto] = $total;
                         }
+                        $recetas[$receta] = $cantidad;
                     }
                 }
             }
         } else {
             $producto = $row['id_preparacion'];
-            $get_producto = "SELECT cantidad FROM productos WHERE id = $producto LIMIT 1;";
+            $get_producto = "SELECT nombre,cantidad FROM productos WHERE id = $producto LIMIT 1;";
             $resultado_get = mysqli_query($con, $get_producto);
             $row1 = mysqli_fetch_array($resultado_get);
             $total = (float)$row1['cantidad'] - (float)$cantidad;
             if ($total < 0) {
-                echo "No hay suficientes productos en inventario.";
-                exit;
+                $venta = 1;
+                array_push($productos, $row1['nombre']);
             } else {
-                $update_producto = "UPDATE productos SET cantidad=$total WHERE id = $producto;";
-                $resultado_update = mysqli_query($con, $update_producto);
-                if ($resultado_update) {
-                    echo 1;
-                    $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
-                    $resultado_update = mysqli_query($con, $update_diario);
+                if (isset($inventario[$producto])) {
+                    $inventario[$producto] = (float)$inventario[$producto] - ((float)$cantidad * (float)$cantidad_producto);
+                    if ($inventario[$producto] < 0) {
+                        $venta = 1;
+                        array_push($productos, $row1['nombre']);
+                    }
+                } else {
+                    $inventario[$producto] = $total;
                 }
             }
         }
     }
 } else {
     echo 0;
+}
+if ($venta == 0) {
+    foreach ($inventario as $key => $value) {
+        $update_producto = "UPDATE productos SET cantidad=$value WHERE id = $key;";
+        $resultado_update = mysqli_query($con, $update_producto);
+    }
+
+    $get_diario = "SELECT fecha FROM diario WHERE id = $id;";
+    $resultado_get = mysqli_query($con, $get_diario);
+    $row2 = mysqli_fetch_array($resultado_get);
+    $fecha = $row2['fecha'];
+
+    foreach ($recetas as $key => $value) {
+        $crear_prod = "INSERT INTO movimientos(id_producto,fecha,tipo, cantidad) VALUES ('$key','$fecha',7,$value);";
+        $resultado5 = mysqli_query($con, $crear_prod);
+    }
+
+    $update_diario = "UPDATE diario SET status=1 WHERE id = $id;";
+    $resultado_update = mysqli_query($con, $update_diario);
+    if ($resultado_update) {
+        echo 1;
+    }
+} else {
+    echo "Los siguientes productos son insuficientes:";
+    foreach ($productos as $producto) {
+        echo $producto . ', ';
+    }
 }
