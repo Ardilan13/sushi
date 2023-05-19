@@ -565,9 +565,12 @@ $("#save_pre").on("click", function (e) {
           alert("Actualizado Correctamente!");
           window.history.go(-1);
           console.log(text);
-        } else {
+        } else if (text == 0) {
           alert("Error, intente nuevamente.");
           console.log(text);
+        } else {
+          alert(text);
+          window.history.go(-1);
         }
       },
       error: function (xhr, status, errorThrown) {
