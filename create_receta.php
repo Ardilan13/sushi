@@ -41,7 +41,7 @@ $con = conectar(); ?>
                                 <input type="number" id="valor_receta" name="valor" min="0" required>
                             </div>
 
-                            <button type="submit" id="agg_receta_venta">Guardar</button>
+                            <button type="submit" value="<?php echo $id; ?>" id="agg_receta_venta">Guardar</button>
                     <?php }
                     } ?>
                 <?php } ?>

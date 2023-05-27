@@ -207,6 +207,7 @@ $("#agg_receta").on("click", function (e) {
 
 $("#agg_producto_venta").on("click", function (e) {
   e.preventDefault();
+  id = $(this).val();
 
   if (
     $("#producto").val().length > 0 &&
@@ -228,7 +229,7 @@ $("#agg_producto_venta").on("click", function (e) {
             success: function (text1) {
               if (text1 == 1) {
                 alert("Producto Agregado a venta!");
-                $(location).prop("href", "ventas.php");
+                $(location).prop("href", "new_venta.php?id=" + id);
               } else if (text1 == 0) {
                 alert("Error, intente nuevamente.");
                 console.log(text1);
@@ -269,7 +270,7 @@ $("#agg_venta").on("click", function (e) {
     success: function (text) {
       if (text > 0) {
         alert("Venta guardada!");
-        window.history.go(-1);
+        location.reload();
       } else {
         alert(text);
         console.log(text);
@@ -283,6 +284,7 @@ $("#agg_venta").on("click", function (e) {
 
 $("#agg_receta_venta").on("click", function (e) {
   e.preventDefault();
+  id = $(this).val();
 
   if (
     $("#receta").val().length > 0 &&
@@ -297,7 +299,7 @@ $("#agg_receta_venta").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Receta Agregado a venta!");
-          $(location).prop("href", "ventas.php");
+          $(location).prop("href", "new_venta.php?id=" + id);
         } else if (text == 0) {
           alert("Error, intente nuevamente.");
           console(text);
@@ -455,7 +457,7 @@ $(".new_pre").on("click", function (e) {
 $(".new_rec").on("click", function (e) {
   e.preventDefault();
 
-  $(location).prop("href", "new_preparacion.php?receta=1");
+  $(location).prop("href", "new_preparacion.php");
 });
 
 $(".des_exc").on("click", function (e) {
@@ -563,14 +565,14 @@ $("#save_pre").on("click", function (e) {
       success: function (text) {
         if (text > 0) {
           alert("Actualizado Correctamente!");
-          window.history.go(-1);
+          location.reload();
           console.log(text);
         } else if (text == 0) {
           alert("Error, intente nuevamente.");
           console.log(text);
         } else {
           alert(text);
-          window.history.go(-1);
+          location.reload();
         }
       },
       error: function (xhr, status, errorThrown) {
@@ -667,6 +669,7 @@ $("#add_pre").on("click", function (e) {
 
 $("#update_ing").on("click", function (e) {
   e.preventDefault();
+  id = $("#preparacion").val();
 
   if ($("#cantidad").val().length > 0 && $("#valor").val().length > 0) {
     $.ajax({
@@ -677,7 +680,7 @@ $("#update_ing").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Ingrediente y valor actualizados!");
-          window.history.go(-1);
+          $(location).prop("href", "new_preparacion.php?id=" + id);
         } else {
           alert("Error, intente nuevamente.");
           alert(text);
@@ -843,7 +846,7 @@ $(".delete_ingrediente").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Ingrediente eliminado!");
-          $(location).prop("href", "preparaciones.php");
+          location.reload();
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);
@@ -870,7 +873,7 @@ $(".delete_pre").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Preparacion eliminada!");
-          window.history.go(-1);
+          location.reload();
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);
@@ -897,7 +900,7 @@ $(".delete_venta_pro").on("click", function (e) {
       success: function (text) {
         if (text == 1) {
           alert("Eliminado correctamente!");
-          window.history.go(-1);
+          location.reload();
         } else {
           alert("Error, intente nuevamente.");
           console.log(text);

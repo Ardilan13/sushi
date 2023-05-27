@@ -33,7 +33,7 @@ $con = conectar(); ?>
                                 <input type="number" id="valor" name="valor" min="0" required>
                             </div>
 
-                            <button type="submit" id="agg_producto_venta">Guardar</button>
+                            <button type="submit" value="<?php echo $id; ?>" id="agg_producto_venta">Guardar</button>
                     <?php }
                     } ?>
                 <?php } ?>
