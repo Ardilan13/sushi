@@ -457,7 +457,7 @@ $(".new_pre").on("click", function (e) {
 $(".new_rec").on("click", function (e) {
   e.preventDefault();
 
-  $(location).prop("href", "new_preparacion.php");
+  $(location).prop("href", "new_preparacion.php?receta=1");
 });
 
 $(".des_exc").on("click", function (e) {
