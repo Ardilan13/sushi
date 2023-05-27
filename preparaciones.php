@@ -75,6 +75,7 @@ $con = conectar(); ?>
             <div class="botones">
                 <?php if ($_SESSION["id"] == 'admin') { ?>
                     <button class="new_pre">Nueva Preparacion</button>
+                    <button class="edit act_valores">Actualizar Valores</button>
                 <?php } ?>
             </div>
         </div>

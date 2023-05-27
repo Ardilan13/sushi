@@ -507,6 +507,29 @@ $("#add_preparacion").on("click", function (e) {
   }
 });
 
+$(".act_valores").on("click", function (e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/update_value_recetas.php",
+    data: $("#new_preparacion").serialize(),
+    type: "POST",
+    dataType: "text",
+    success: function (text) {
+      if (text == 1) {
+        alert("Valores de Recetas y Preparaciones Actualizados!");
+        location.reload();
+      } else {
+        alert("Error, intente nuevamente.");
+        alert(text);
+      }
+    },
+    error: function (xhr, status, errorThrown) {
+      alert("Error");
+    },
+  });
+});
+
 //Ajax actualiza la preparacion seleccionado
 $("#btn_update_pre").on("click", function (e) {
   e.preventDefault();
