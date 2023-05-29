@@ -15,7 +15,7 @@ if ($resultado) {
     $resultado_get = mysqli_query($con, $get_producto);
     $row = mysqli_fetch_array($resultado_get);
     $total = (float)$row['cantidad'] + ((float)$cantidad - (((float)$cantidad * (float)$row['merma']) / 100));
-    $precioU = (((float)$row['precio'] * (float)$row['cantidad']) + ((float)$precio * (float)$cantidad)) / $total;
+    $precioU = (((float)$row['precio'] * (float)$row['cantidad']) + ((float)$precio * (((float)$cantidad * (float)$row['merma']) / 100))) / $total;
     if ($row['precio'] > $precioU) {
         $status = 0;
     } else if ($row['precio'] < $precioU) {

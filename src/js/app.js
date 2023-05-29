@@ -973,7 +973,7 @@ $("#producto").change(function () {
         //traen los datos en un json y se muestran en los placeholder
         var data = $.parseJSON(text);
         $("#precio").attr("placeholder", data.precio);
-        $("#valor").attr("placeholder", data.real);
+        $("#valor").attr("placeholder", data.precio);
         $("#cantidad").attr("placeholder", data.cantidad);
         $("#cantidad").attr("precio", data.valor);
         $("#cantidad").val("");
