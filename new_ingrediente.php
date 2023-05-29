@@ -23,7 +23,7 @@ require_once 'includes/auth.php'; ?>
                     </div>
                     <div class="input">
                         <label for="valor">Precio:</label>
-                        <input type="number" id="valor" name="valor" step="0.01" min="0" required>
+                        <input type="number" id="valor_receta_producto" name="valor" step="0.0001" min="0" required>
                     </div>
                     <button id="add_ing">Nuevo Ingrediente</button>
                     <?php } else if (isset($_GET['ingrediente'])) {

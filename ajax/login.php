@@ -7,6 +7,10 @@ if ($clave == 'prueba') {
     echo 1;
 } else if ($clave == 'admin') {
     session_start();
+    $_SESSION["id"] = 'prueba';
+    echo 1;
+} else if ($clave == 'william') {
+    session_start();
     $_SESSION["id"] = 'admin';
     echo 1;
 } else {

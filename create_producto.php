@@ -30,7 +30,7 @@ $con = conectar(); ?>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" id="valor" name="valor" min="0" required>
+                                <input type="number" id="valor_receta_producto" name="valor" min="0" required>
                             </div>
 
                             <button type="submit" value="<?php echo $id; ?>" id="agg_producto_venta">Guardar</button>

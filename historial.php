@@ -30,6 +30,7 @@ if ($resultado->num_rows > 0) {
                         <th>Mes</th>
                         <th>Año</th>
                         <th>Cantidad</th>
+                        <th>Valor</th>
                         <th>Motivo</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
                                 <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td>0</td>
                                 <td><b>Movimiento</b></td>
                             </tr>
                         <?php }
@@ -72,6 +74,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
                                 <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["precio"] * $row["cantidad"], 3); ?></td>
                                 <td><b>Compra</b></td>
                             </tr>
                         <?php }
@@ -90,6 +93,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
                                 <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td><?php echo number_format($row["valor"] * $row["cantidad"], 3);  ?></td>
                                 <td><b>Venta Producto</b></td>
                             </tr>
                         <?php }
@@ -108,6 +112,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
                                 <td><?php echo number_format(($row["cantidad"] * $row["receta"]), 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"] * $row["receta"]; ?></span></td>
+                                <td><?php echo number_format($row["valor"] * ($row["cantidad"] * $row["receta"]), 3); ?></td>
                                 <td><b>Venta Receta</b></td>
                             </tr>
                         <?php }
@@ -136,6 +141,7 @@ if ($resultado->num_rows > 0) {
                                     <td><?php echo $mes; ?></td>
                                     <td><?php echo $ano; ?></td>
                                     <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                    <td>0</td>
                                     <td><b>Preparacion</b></td>
                             </tr>
                         <?php }
@@ -164,6 +170,7 @@ if ($resultado->num_rows > 0) {
                                     <td><?php echo $mes; ?></td>
                                     <td><?php echo $ano; ?></td>
                                     <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                    <td>0</td>
                                     <td><b>Produccion</b></td>
                             </tr>
                         <?php }
@@ -183,6 +190,7 @@ if ($resultado->num_rows > 0) {
                                 <td><?php echo $mes; ?></td>
                                 <td><?php echo $ano; ?></td>
                                 <td><?php echo number_format($row["cantidad"], 3) . ' ' . $und; ?><span class="cantidad" hidden><?php echo $row["cantidad"]; ?></span></td>
+                                <td>0</td>
                                 <td><b>Inicial</b></td>
                             </tr>
                     <?php }

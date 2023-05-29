@@ -1,4 +1,6 @@
-<?php require_once '../conexion.php';
+<?php
+session_start();
+require_once '../conexion.php';
 $con = conectar();
 
 $id = $_POST["id"];
@@ -8,7 +10,12 @@ $proveedor = $_POST["proveedor"];
 $unidad = $_POST["unidad"];
 $merma = $_POST["merma"];
 
-$actualizar_prod = "UPDATE `productos` SET `nombre`='$nombre',`tipo`='$tipo',`proveedor`='$proveedor',`unidad`='$unidad',`merma`='$merma' WHERE id = $id";
+if ($_SESSION["id"] == 'admin') {
+    $precio = $_POST["precio"];
+    $actualizar_prod = "UPDATE `productos` SET `nombre`='$nombre',`tipo`='$tipo',`proveedor`='$proveedor',`unidad`='$unidad',`merma`='$merma',precio='$precio' WHERE id = $id";
+} else {
+    $actualizar_prod = "UPDATE `productos` SET `nombre`='$nombre',`tipo`='$tipo',`proveedor`='$proveedor',`unidad`='$unidad',`merma`='$merma' WHERE id = $id";
+}
 $resultado = mysqli_query($con, $actualizar_prod);
 if ($resultado) {
     echo 1;

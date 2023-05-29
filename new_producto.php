@@ -62,7 +62,7 @@ $con = conectar(); ?>
                             </div>
                             <div class="input">
                                 <label for="precio">Precio:</label>
-                                <input type="number" id="precio" disabled name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
+                                <input <?php echo ($_SESSION['id'] != "admin") ? ' disabled' : ''; ?> type="number" id="precio" name="precio" value="<?php echo $row["precio"]; ?>" min="0" required>
                             </div>
                             <button type="submit" id="btn_historial">Historial</button>
                             <button type="submit" class="edit" id="btn_producir">Producir</button>

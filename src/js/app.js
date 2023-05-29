@@ -209,11 +209,7 @@ $("#agg_producto_venta").on("click", function (e) {
   e.preventDefault();
   id = $(this).val();
 
-  if (
-    $("#producto").val().length > 0 &&
-    $("#cantidad").val().length > 0 &&
-    $("#valor").val().length > 0
-  ) {
+  if ($("#producto").val().length > 0 && $("#cantidad").val().length > 0) {
     $.ajax({
       url: "ajax/verificar_cantidad.php",
       data: $("#new_producto_venta").serialize(),
@@ -610,11 +606,7 @@ $("#save_pre").on("click", function (e) {
 $("#add_ing").on("click", function (e) {
   e.preventDefault();
 
-  if (
-    $("#producto").val().length > 0 &&
-    $("#cantidad").val().length > 0 &&
-    $("#valor").val().length > 0
-  ) {
+  if ($("#producto").val().length > 0 && $("#cantidad").val().length > 0) {
     $.ajax({
       url: "ajax/add_ingrediente.php",
       data: $("#new_ingrediente").serialize(),
@@ -939,7 +931,7 @@ $(".delete_venta_pro").on("click", function (e) {
 $("#receta").change(function () {
   //poner que tipo de unidad es el producto
   var valor = $("#receta option:selected").attr("valor");
-  $("#valor_receta").attr("placeholder", valor);
+  $("#valor_receta").val(valor);
 });
 
 //Actualizar la cantidad para tener en cuenta las unidades, modulo agreagr compras
@@ -974,6 +966,7 @@ $("#producto").change(function () {
         var data = $.parseJSON(text);
         $("#precio").attr("placeholder", data.precio);
         $("#valor").attr("placeholder", data.precio);
+        $("#valor_receta_producto").val(data.valor);
         $("#cantidad").attr("placeholder", data.cantidad);
         $("#cantidad").attr("precio", data.valor);
         $("#cantidad").val("");

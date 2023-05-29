@@ -82,10 +82,10 @@ if ($id == null) {
         while ($row2 = mysqli_fetch_assoc($resultado2)) {
             $id_producto = $row2['id'];
             $nombre = $row2['nombre'];
-            $cantidad_producto = $row2['cantidad'];
-            $cantidad_preparacion = $row2['preparacion'];
-            $cantidad_usada = $cantidad_preparacion * $cantidad;
-            $cantidad_total = $cantidad_producto - $cantidad_usada;
+            $cantidad_producto = (float)$row2['cantidad'];
+            $cantidad_preparacion = (float)$row2['preparacion'];
+            $cantidad_usada = (float)$cantidad_preparacion * (float)$cantidad;
+            $cantidad_total = (float)$cantidad_producto - (float)$cantidad_usada;
             if ($cantidad_total < 0) {
                 $nombre_producto = $nombre;
                 $cantidad_real = $cantidad_usada;
@@ -113,7 +113,7 @@ if ($id == null) {
                 }
             }
 
-            if (isset($inventario) && $inventario < ($check_producto + $cantidad)) {
+            if (isset($inventario) && $inventario < ($check_producto + $cantidad_usada)) {
                 echo "No hay suficiente $nombre en inventario, solo hay $inventario y ya se agregaron en venta $check_producto";
                 exit();
             }
